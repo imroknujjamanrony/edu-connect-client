@@ -1,3 +1,4 @@
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/4f984418-1b26-4f21-97be-1c6965c39022.jpg";
 const Navbar = () => {
   const isLoggedIn = true; // Replace with your actual logic for checking login status
@@ -10,14 +11,22 @@ const Navbar = () => {
       <div className="flex-1">
         {/* Website Logo and Name */}
         <img className="w-14" src={logo} alt="" />
-        <a className="btn btn-ghost text-xl">EduConnect</a>
+        <Link to={"/"} className="btn btn-ghost text-xl">
+          EduConnect
+        </Link>
       </div>
       <div className="flex-none">
         {/* Navbar Items */}
         <div className="flex space-x-4">
-          <a className="btn btn-ghost">Home</a>
-          <a className="btn btn-ghost">All Classes</a>
-          <a className="btn btn-ghost">Teach on EduConnect</a>
+          <NavLink to={"/"} className="btn btn-ghost">
+            Home
+          </NavLink>
+          <NavLink to={"/all-classes"} className="btn btn-ghost">
+            All Classes
+          </NavLink>
+          <NavLink to={"/teachonEduconnect"} className="btn btn-ghost">
+            Teach on EduConnect
+          </NavLink>
         </div>
 
         {/* Login/Sign Out button and Profile dropdown */}
@@ -43,15 +52,17 @@ const Navbar = () => {
                 </a>
               </li>
               <li>
-                <a href="/dashboard">Dashboard</a>
+                <NavLink to={"/dashboard"}>Dashboard</NavLink>
               </li>
               <li>
-                <a href="/logout">Logout</a>
+                <button className="btn btn-success">Logout</button>
               </li>
             </ul>
           </div>
         ) : (
-          <a className="btn btn-ghost">Sign In</a>
+          <NavLink to={"/login"} className="btn btn-ghost">
+            Sign In
+          </NavLink>
         )}
       </div>
     </div>
