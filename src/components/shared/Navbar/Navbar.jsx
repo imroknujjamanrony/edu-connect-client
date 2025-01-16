@@ -1,3 +1,4 @@
+import logo from "../../../assets/4f984418-1b26-4f21-97be-1c6965c39022.jpg";
 const Navbar = () => {
   const isLoggedIn = true; // Replace with your actual logic for checking login status
   const userName = "John Doe"; // Replace with actual user's name
@@ -5,9 +6,10 @@ const Navbar = () => {
     "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"; // Replace with user's profile picture
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar fixed z-20 bg-base-100">
       <div className="flex-1">
         {/* Website Logo and Name */}
+        <img className="w-14" src={logo} alt="" />
         <a className="btn btn-ghost text-xl">EduConnect</a>
       </div>
       <div className="flex-none">
