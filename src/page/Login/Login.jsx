@@ -1,11 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { LogIn, signInWithGoogle } = useAuth();
+
   const handleLogin = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
+
+    // Log in
+    try {
+      await LogIn(email, password);
+      navigate("/");
+    } catch (error) {
+      console.error("ERROR", error.message);
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      await signInWithGoogle();
+      navigate("/");
+    } catch (error) {
+      console.log("error", error.message);
+    }
   };
 
   return (
@@ -49,7 +69,9 @@ const Login = () => {
           </div>
         </form>
         <div className="flex justify-center py-2">
-          <button className="btn btn-secondary">Sign in with Google</button>
+          <button onClick={handleGoogleLogin} className="btn btn-secondary">
+            Sign in with Google
+          </button>
         </div>
         <p className="text-center font-semibold py-1">
           Don't have an account?{" "}
