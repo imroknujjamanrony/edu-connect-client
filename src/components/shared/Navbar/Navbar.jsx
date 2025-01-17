@@ -55,8 +55,9 @@ const Navbar = () => {
                 <img
                   alt="User Profile"
                   src={
-                    user?.photoURL ||
-                    "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    user && user.photoURL
+                      ? user.photoURL
+                      : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
                   }
                 />
               </div>

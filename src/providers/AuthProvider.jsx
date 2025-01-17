@@ -11,40 +11,44 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
+import axios from "axios";
 
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
-// eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  //create user
+  // Create user
   const createUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  // signin
+  // Sign in
   const LogIn = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
-  //signin in with popup google
+
+  // Sign in with Google
   const signInWithGoogle = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
 
-  //logout
+  // Logout
   const logOut = async () => {
     setLoading(true);
+    await axios.get("http://localhost:5000/logout", {
+      withCredentials: true,
+    });
     return signOut(auth);
   };
 
-  //update profile
+  // Update profile
   const updateUserProfile = (name, photo) => {
     return updateProfile(auth.currentUser, {
       displayName: name,
@@ -52,14 +56,43 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  // observer
+  // Auth state observer with JWT handling
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log(currentUser);
-      setLoading(false); // Auth state determined
+      console.log(currentUser?.email);
+
+      if (currentUser?.email) {
+        const user = { email: currentUser.email };
+
+        axios
+          .post("http://localhost:5000/jwt", user, {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log("Login JWT token", res.data);
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.error("Error fetching JWT token:", error);
+          });
+      } else {
+        axios
+          .get("http://localhost:5000/logout", {
+            withCredentials: true,
+          })
+          .then((res) => {
+            console.log("Logout", res.data);
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.error("Error during logout:", error);
+          });
+      }
     });
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const authInfo = {
