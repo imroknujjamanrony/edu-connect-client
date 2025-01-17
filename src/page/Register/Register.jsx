@@ -1,4 +1,12 @@
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+
 const Register = () => {
+  const { createUser, updateUserProfile, signInWithGoogle, loading } =
+    useAuth();
+  const navigate = useNavigate();
+
   const handleRegister = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
@@ -7,11 +15,44 @@ const Register = () => {
     const password = e.target.password.value;
 
     // Validate password
-    // const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{6,}$/;
-    // if (!regex.test(password)) {
-    //   alert("Please use at least one uppercase, one lowercase, and one digit.");
-    //   return;
-    // }
+    const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{6,}$/;
+    if (!regex.test(password)) {
+      Swal.fire({
+        title: "Invalid Password",
+        text: "Please use at least one uppercase, one lowercase, and one digit.",
+        icon: "warning",
+        confirmButtonText: "OK",
+      });
+      return;
+    }
+
+    try {
+      // User Registration
+      const result = await createUser(email, password);
+
+      // Save username & profile photo
+      await updateUserProfile(name, photoUrl);
+      console.log(result);
+
+      // Navigate to the home page
+      navigate("/");
+
+      // Show success alert
+      Swal.fire({
+        title: "Signup Successful",
+        icon: "success",
+        confirmButtonText: "OK",
+      });
+    } catch (err) {
+      console.error(err);
+      // Show error alert
+      Swal.fire({
+        title: "Error",
+        text: err?.message || "Something went wrong!",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
   };
 
   return (
