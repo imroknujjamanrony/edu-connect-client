@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -9,10 +10,23 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
-    const photoUrl = e.target.url.value;
+    // const photoUrl = e.target.url.value;
     const number = e.target.number.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
+    const image = e.target.image.files[0];
+    const formData = new FormData();
+    formData.append("image", image);
+
+    //send image data to imgbb
+    const { data } = await axios.post(
+      `https://api.imgbb.com/1/upload?key=${
+        import.meta.env.VITE_IMGBB_API_KEY
+      }`,
+      formData
+    );
+
+    const image_url = data.data.display_url;
 
     // Validate password
     const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{6,}$/;
@@ -31,7 +45,7 @@ const Register = () => {
       const result = await createUser(email, password);
 
       // Save username & profile photo
-      await updateUserProfile(name, photoUrl, number);
+      await updateUserProfile(name, image_url, number);
       console.log(result);
 
       // Navigate to the home page
@@ -74,7 +88,7 @@ const Register = () => {
               required
             />
           </div>
-          <div className="form-control">
+          {/* <div className="form-control">
             <label className="label">
               <span className="label-text">Photo URL</span>
             </label>
@@ -85,8 +99,8 @@ const Register = () => {
               className="input input-bordered"
               required
             />
-          </div>
-          <div className="form-control">
+          </div> */}
+          {/* <div className="form-control">
             <label className="label">
               <span className="label-text">Number</span>
             </label>
@@ -96,6 +110,18 @@ const Register = () => {
               placeholder="Enter Your Number"
               className="input input-bordered"
               required
+            />
+          </div> */}
+          <div>
+            <label htmlFor="image" className="block mb-2 text-sm">
+              Select Image:
+            </label>
+            <input
+              required
+              type="file"
+              id="image"
+              name="image"
+              accept="image/*"
             />
           </div>
           <div className="form-control">

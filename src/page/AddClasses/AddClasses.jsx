@@ -34,7 +34,7 @@ const AddClasses = () => {
               name="name"
               id="name"
               type="text"
-              value={user.displayName} // Example value, replace with dynamic value as needed
+              value={user?.displayName} // Example value, replace with dynamic value as needed
               readOnly
             />
           </div>
@@ -49,7 +49,7 @@ const AddClasses = () => {
               name="email"
               id="email"
               type="email"
-              value={user.email} // Example value, replace with dynamic value as needed
+              value={user?.email} // Example value, replace with dynamic value as needed
               readOnly
             />
           </div>

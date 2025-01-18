@@ -5,9 +5,9 @@ import Register from "../page/Register/Register";
 import Login from "../page/Login/Login";
 import DashboardLayout from "../layouts/DashboardLayout";
 import MyEnrollclass from "../components/MyEnrollClass";
-import Profile from "../page/myProfile/Profile";
 import AddClasses from "../page/AddClasses/AddClasses";
 import MyClass from "../page/dashboard/sidebar/menuItem/teacherItem/MyClass";
+import MyProfile from "../page/myProfile/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -37,13 +37,12 @@ const router = createBrowserRouter([
         element: <MyEnrollclass />, // Default element when visiting /dashboard
       },
       {
-        index: true,
         path: "my-enroll-class",
         element: <MyEnrollclass></MyEnrollclass>,
       },
       {
         path: "profile",
-        element: <Profile></Profile>,
+        element: <MyProfile></MyProfile>,
       },
       {
         path: "addClasses",
