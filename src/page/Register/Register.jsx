@@ -10,6 +10,7 @@ const Register = () => {
     e.preventDefault();
     const name = e.target.name.value;
     const photoUrl = e.target.url.value;
+    const number = e.target.number.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
 
@@ -30,7 +31,7 @@ const Register = () => {
       const result = await createUser(email, password);
 
       // Save username & profile photo
-      await updateUserProfile(name, photoUrl);
+      await updateUserProfile(name, photoUrl, number);
       console.log(result);
 
       // Navigate to the home page
@@ -81,6 +82,18 @@ const Register = () => {
               type="text"
               name="url"
               placeholder="Enter Your Photo URL"
+              className="input input-bordered"
+              required
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Number</span>
+            </label>
+            <input
+              type="number"
+              name="number"
+              placeholder="Enter Your Number"
               className="input input-bordered"
               required
             />
