@@ -58,15 +58,29 @@ const AuthProvider = ({ children }) => {
 
   // Auth state observer with JWT handling
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    // const axiosSecure=useAxiosSecure();
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+
+      //send user to database
+
+      await axios.post(
+        `${import.meta.env.VITE_API_URL}/users/${currentUser?.email}
+       `,
+        {
+          name: currentUser?.displayName,
+          image: currentUser?.photoURL,
+          email: currentUser?.email,
+        }
+      );
+
       console.log(currentUser?.email);
 
       if (currentUser?.email) {
         const user = { email: currentUser.email };
 
         axios
-          .post("http://localhost:5000/jwt", user, {
+          .post(`${import.meta.env.VITE_API_URL}/jwt`, user, {
             withCredentials: true,
           })
           .then((res) => {

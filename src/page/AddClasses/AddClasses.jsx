@@ -1,10 +1,66 @@
+import { useState } from "react";
+import { imageUpload } from "../../components/api/utils";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const AddClasses = () => {
+  const axiosSecure = useAxiosSecure();
+  const [loading, setLoading] = useState(false);
   const { user } = useAuth();
+  const [uploadButtonText, setuploadButtonText] = useState("upload image");
+
+  // Handle form submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const form = e.target;
+    const title = form.title.value;
+    const price = parseFloat(form.price.value);
+    const description = form.description.value;
+    const image = form.image.files[0];
+    const imageUrl = await imageUpload(image);
+    const publisher = {
+      name: user?.displayName,
+      email: user?.email,
+      image: user?.photoURL,
+    };
+
+    // Create add classes and send to db
+    const classData = {
+      title,
+      price,
+      description,
+      image: imageUrl,
+      publisher,
+    };
+
+    try {
+      await axiosSecure.post("/classes", classData);
+      Swal.fire({
+        title: "Success",
+        text: "Class Added Successfully.",
+        icon: "success",
+        confirmButtonText: "OK",
+      }).then(() => {
+        // Reset the form
+        form.reset();
+        // Reset the upload button text
+        setuploadButtonText("upload image");
+      });
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="w-full min-h-screen py-10 flex flex-col justify-center items-center text-gray-800 bg-gray-100">
-      <form className="w-full max-w-4xl bg-white shadow-md rounded-lg p-8">
+      <form
+        onSubmit={handleSubmit}
+        className="w-full max-w-4xl bg-white shadow-md rounded-lg p-8"
+      >
         <h2 className="text-2xl font-bold mb-6 text-center text-[#2563EB]">
           Add a New Class
         </h2>
@@ -93,6 +149,7 @@ const AddClasses = () => {
             <div className="flex flex-col w-max mx-auto text-center">
               <label>
                 <input
+                  onChange={(e) => setuploadButtonText(e.target.files[0].name)}
                   className="text-sm cursor-pointer w-36 hidden"
                   type="file"
                   name="image"
@@ -101,7 +158,7 @@ const AddClasses = () => {
                   required
                 />
                 <div className="bg-[#2563EB] text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3 hover:bg-lime-600">
-                  Upload Image
+                  {uploadButtonText}
                 </div>
               </label>
             </div>

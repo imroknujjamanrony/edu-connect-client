@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import axios from "axios";
+import { imageUpload } from "../../components/api/utils";
 
 const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -11,22 +11,12 @@ const Register = () => {
     e.preventDefault();
     const name = e.target.name.value;
     // const photoUrl = e.target.url.value;
-    const number = e.target.number.value;
+    // const number = e.target.number.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
     const image = e.target.image.files[0];
-    const formData = new FormData();
-    formData.append("image", image);
 
-    //send image data to imgbb
-    const { data } = await axios.post(
-      `https://api.imgbb.com/1/upload?key=${
-        import.meta.env.VITE_IMGBB_API_KEY
-      }`,
-      formData
-    );
-
-    const image_url = data.data.display_url;
+    const photoURL = await imageUpload(image);
 
     // Validate password
     const regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{6,}$/;
@@ -45,7 +35,7 @@ const Register = () => {
       const result = await createUser(email, password);
 
       // Save username & profile photo
-      await updateUserProfile(name, image_url, number);
+      await updateUserProfile(name, photoURL);
       console.log(result);
 
       // Navigate to the home page
