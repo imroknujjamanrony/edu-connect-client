@@ -8,6 +8,8 @@ import MyEnrollclass from "../components/MyEnrollClass";
 import AddClasses from "../page/AddClasses/AddClasses";
 import MyClass from "../page/dashboard/sidebar/menuItem/teacherItem/MyClass";
 import MyProfile from "../page/myProfile/MyProfile";
+import AllClasses from "../page/Allclass/AllClasses";
+import ClassDetails from "../page/Allclass/ClassDetails";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/all-classes",
+        element: <AllClasses></AllClasses>,
+      },
+      {
+        path: "/class/:id",
+        element: <ClassDetails></ClassDetails>,
       },
       {
         path: "/register",
