@@ -10,6 +10,10 @@ import MyClass from "../page/dashboard/sidebar/menuItem/teacherItem/MyClass";
 import MyProfile from "../page/myProfile/MyProfile";
 import AllClasses from "../page/Allclass/AllClasses";
 import ClassDetails from "../page/Allclass/ClassDetails";
+import TeachOnWebsite from "../page/TeachOnWebSite/TeachOnWebsite";
+import TeachersRequest from "../page/dashboard/sidebar/menuItem/AdminMenu/AdminItem/TeachersRequest";
+import AdminClass from "../page/dashboard/sidebar/menuItem/AdminMenu/AdminItem/AdminClass";
+import AllUsers from "../page/dashboard/sidebar/menuItem/AdminMenu/AdminItem/AllUsers";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +33,10 @@ const router = createBrowserRouter([
         element: <ClassDetails></ClassDetails>,
       },
       {
+        path: "/TeachOnWebsite",
+        element: <TeachOnWebsite></TeachOnWebsite>,
+      },
+      {
         path: "/register",
         element: <Register></Register>,
       },
@@ -42,9 +50,14 @@ const router = createBrowserRouter([
     path: "dashboard",
     element: <DashboardLayout></DashboardLayout>,
     children: [
+      // admin routes
       {
-        index: true,
-        element: <MyEnrollclass />, // Default element when visiting /dashboard
+        path: "users",
+        element: <AllUsers></AllUsers>,
+      },
+      {
+        path: "teacherRequest",
+        element: <TeachersRequest></TeachersRequest>,
       },
       {
         path: "my-enroll-class",
@@ -53,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "profile",
         element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "adminAllclasses",
+        element: <AdminClass></AdminClass>,
       },
       {
         path: "addClasses",

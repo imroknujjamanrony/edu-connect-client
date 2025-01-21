@@ -38,7 +38,7 @@ const Navbar = () => {
           <NavLink to="/all-classes" className="btn btn-ghost">
             All Classes
           </NavLink>
-          <NavLink to="/teachonEduconnect" className="btn btn-ghost">
+          <NavLink to="/TeachOnWebsite" className="btn btn-ghost">
             Teach on EduConnect
           </NavLink>
         </div>
