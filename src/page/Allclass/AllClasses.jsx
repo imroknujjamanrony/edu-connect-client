@@ -28,7 +28,10 @@ const AllClasses = () => {
       <h1 className="text-3xl font-bold mb-6">All Classes</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {allClasses.map((classItem) => (
-          <div key={classItem.id} className="bg-white p-6 rounded-lg shadow-md">
+          <div
+            key={classItem._id}
+            className="bg-white p-6 rounded-lg shadow-md"
+          >
             <img
               src={classItem.image}
               alt={classItem.title}

@@ -8,8 +8,10 @@ const ClassCard = ({ classItem, onUpdate, onDelete, onSeeDetails }) => {
         className="w-full h-32 object-cover rounded-lg mb-4"
       />
       <h2 className="text-xl font-bold">{classItem.title}</h2>
-      <p className="text-sm text-gray-600">Name: {classItem.name}</p>
-      <p className="text-sm text-gray-600">Email: {classItem.email}</p>
+      <p className="text-sm text-gray-600">Name: {classItem.publisher.name}</p>
+      <p className="text-sm text-gray-600">
+        Email: {classItem.publisher.email}
+      </p>
       <p className="text-sm text-gray-600">Price: ${classItem.price}</p>
       <p className="text-sm text-gray-600 mb-4">
         Description: {classItem.description}
@@ -29,7 +31,7 @@ const ClassCard = ({ classItem, onUpdate, onDelete, onSeeDetails }) => {
       </button>
       <button
         className="bg-red-500 text-white px-4 py-2 rounded-md mr-2"
-        onClick={() => onDelete(classItem.id)}
+        onClick={() => onDelete(classItem._id)}
       >
         Delete
       </button>

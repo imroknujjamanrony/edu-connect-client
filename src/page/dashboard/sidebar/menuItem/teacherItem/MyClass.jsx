@@ -1,14 +1,16 @@
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import ClassCard from "./ClassCard";
+import UpdateClass from "./UpdateClass"; // Import the new component
 
 const MyClass = () => {
   const [selectedClass, setSelectedClass] = useState(null);
   const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { data: classItems, isLoading } = useQuery({
     queryKey: ["myClasses"],
@@ -17,6 +19,19 @@ const MyClass = () => {
       return data;
     },
   });
+
+  const deleteMutation = useMutation({
+    mutationFn: (classId) =>
+      axios.delete(`${import.meta.env.VITE_API_URL}/class/${classId}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["myClasses"]);
+      Swal.fire("Deleted!", "Your class has been deleted.", "success");
+    },
+    onError: () => {
+      Swal.fire("Error!", "Failed to delete the class.", "error");
+    },
+  });
+
   if (isLoading) {
     return <span className="loading loading-spinner text-success"></span>;
   }
@@ -35,7 +50,7 @@ const MyClass = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your class has been deleted.", "success");
+        deleteMutation.mutate(classId);
       }
     });
   };
@@ -49,19 +64,13 @@ const MyClass = () => {
     setSelectedClass(null);
   };
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    handleModalClose();
-    Swal.fire("Updated!", "Your class has been updated.", "success");
-  };
-
   return (
     <div>
       <h1 className="text-3xl font-bold mb-6">My Classes</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {classItems.map((classItem) => (
           <ClassCard
-            key={classItem.id}
+            key={classItem._id}
             classItem={classItem}
             onUpdate={handleUpdateClick}
             onDelete={handleDeleteClick}
@@ -70,13 +79,8 @@ const MyClass = () => {
         ))}
       </div>
 
-      {isUpdateModalOpen && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold mb-4">Update Class</h2>
-            <form onSubmit={handleFormSubmit}>{/* Form fields */}</form>
-          </div>
-        </div>
+      {isUpdateModalOpen && selectedClass && (
+        <UpdateClass classItem={selectedClass} onClose={handleModalClose} />
       )}
     </div>
   );

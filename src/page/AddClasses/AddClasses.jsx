@@ -36,7 +36,7 @@ const AddClasses = () => {
     };
 
     try {
-      await axiosSecure.post("/classes", classData);
+      await axiosSecure.post("/class", classData);
       Swal.fire({
         title: "Success",
         text: "Class Added Successfully.",
