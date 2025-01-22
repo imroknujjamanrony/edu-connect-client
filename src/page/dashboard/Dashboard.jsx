@@ -1,8 +1,9 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { FaBook, FaHome, FaUser } from "react-icons/fa";
+import useAdmin from "../../hooks/useAdmin";
 
 const Dashboard = () => {
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
   const isTeacher = true;
   return (
     <div className="dashboard-layout flex min-h-screen bg-gray-100">

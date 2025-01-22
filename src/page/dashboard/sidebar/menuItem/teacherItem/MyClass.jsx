@@ -5,8 +5,10 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import ClassCard from "./ClassCard";
 import UpdateClass from "./UpdateClass"; // Import the new component
+import useAxiosSecure from "../../../../../hooks/useAxiosSecure";
 
 const MyClass = () => {
+  const axiosSecure = useAxiosSecure();
   const [selectedClass, setSelectedClass] = useState(null);
   const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -15,7 +17,9 @@ const MyClass = () => {
   const { data: classItems, isLoading } = useQuery({
     queryKey: ["myClasses"],
     queryFn: async () => {
-      const { data } = await axios(`${import.meta.env.VITE_API_URL}/myClasses`);
+      const { data } = await axiosSecure.get(
+        `${import.meta.env.VITE_API_URL}/myClasses`
+      );
       return data;
     },
   });

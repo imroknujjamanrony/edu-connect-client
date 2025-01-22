@@ -45,6 +45,7 @@ const AuthProvider = ({ children }) => {
     await axios.get("http://localhost:5000/logout", {
       withCredentials: true,
     });
+    localStorage.removeItem("jwtToken"); // Remove JWT token on logout
     return signOut(auth);
   };
 
@@ -56,54 +57,68 @@ const AuthProvider = ({ children }) => {
     });
   };
 
-  // Auth state observer with JWT handling
+  // Auth state observer with JWT handling from localStorage
+
   useEffect(() => {
-    // const axiosSecure=useAxiosSecure();
+    const token = localStorage.getItem("jwtToken"); // Retrieve JWT token from localStorage
+
+    // Set the Authorization header globally for Axios
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      //   console.log(
+      //     "Authorization Header Set:",
+      //     axios.defaults.headers.common["Authorization"]
+      //   );
+      // } else {
+      // console.log("No JWT token found in localStorage.");
+    }
+
+    // Monitor auth state changes
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
-
-      //send user to database
-
-      await axios.post(
-        `${import.meta.env.VITE_API_URL}/users/${currentUser?.email}
-       `,
-        {
-          name: currentUser?.displayName,
-          image: currentUser?.photoURL,
-          email: currentUser?.email,
-        }
-      );
-
-      console.log(currentUser?.email);
 
       if (currentUser?.email) {
         const user = { email: currentUser.email };
 
-        axios
-          .post(`${import.meta.env.VITE_API_URL}/jwt`, user, {
-            withCredentials: true,
-          })
-          .then((res) => {
-            console.log("Login JWT token", res.data);
-            setLoading(false);
-          })
-          .catch((error) => {
-            console.error("Error fetching JWT token:", error);
-          });
+        // Fetch JWT token from the backend
+        try {
+          const res = await axios.post(
+            `${import.meta.env.VITE_API_URL}/jwt`,
+            user,
+            {
+              withCredentials: true, // Ensure cookies are sent if required
+            }
+          );
+
+          if (res.data.success) {
+            const { token } = res.data;
+
+            // Store token in localStorage
+            localStorage.setItem("jwtToken", token);
+            // console.log("New JWT token stored in localStorage:", token);
+
+            // Update the Axios global Authorization header
+            axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+            console.log(
+              "Updated Authorization Header:",
+              axios.defaults.headers.common["Authorization"]
+            );
+          }
+        } catch (error) {
+          console.error(
+            "Error fetching JWT token:",
+            error.response?.data || error.message
+          );
+        } finally {
+          setLoading(false);
+        }
       } else {
-        axios
-          .get("http://localhost:5000/logout", {
-            withCredentials: true,
-          })
-          .then((res) => {
-            console.log("Logout", res.data);
-            setLoading(false);
-          })
-          .catch((error) => {
-            console.error("Error during logout:", error);
-          });
+        console.log("No authenticated user detected.");
+        setLoading(false);
       }
     });
+
+    // Cleanup function
     return () => {
       unsubscribe();
     };

@@ -3,8 +3,10 @@ import axios from "axios";
 import { FaTrashAlt, FaUser } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../../../hooks/useAxiosSecure";
 
 const AllUsers = () => {
+  const axiosSecure = useAxiosSecure();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
 
@@ -16,7 +18,9 @@ const AllUsers = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/users`);
+      const { data } = await axiosSecure.get(
+        `${import.meta.env.VITE_API_URL}/users`
+      );
       return data;
     },
   });
