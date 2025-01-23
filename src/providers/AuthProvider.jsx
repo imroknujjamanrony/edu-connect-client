@@ -65,12 +65,6 @@ const AuthProvider = ({ children }) => {
     // Set the Authorization header globally for Axios
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      //   console.log(
-      //     "Authorization Header Set:",
-      //     axios.defaults.headers.common["Authorization"]
-      //   );
-      // } else {
-      // console.log("No JWT token found in localStorage.");
     }
 
     // Monitor auth state changes
@@ -79,6 +73,16 @@ const AuthProvider = ({ children }) => {
 
       if (currentUser?.email) {
         const user = { email: currentUser.email };
+
+        //save info to in db
+        axios.post(
+          `${import.meta.env.VITE_API_URL}/users/${currentUser?.email}}`,
+          {
+            name: currentUser?.name,
+            image: currentUser?.photoURL,
+            email: currentUser?.email,
+          }
+        );
 
         // Fetch JWT token from the backend
         try {

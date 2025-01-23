@@ -12,8 +12,9 @@ import AllClasses from "../page/Allclass/AllClasses";
 import ClassDetails from "../page/Allclass/ClassDetails";
 import TeachOnWebsite from "../page/TeachOnWebSite/TeachOnWebsite";
 import TeachersRequest from "../page/dashboard/sidebar/menuItem/AdminMenu/AdminItem/TeachersRequest";
-import AdminClass from "../page/dashboard/sidebar/menuItem/AdminMenu/AdminItem/AdminClass";
 import AllUsers from "../page/dashboard/sidebar/menuItem/AdminMenu/AdminItem/AllUsers";
+import AdminRoute from "./AdminRoute";
+import AllReqClass from "../page/dashboard/sidebar/menuItem/AdminMenu/AdminItem/AllReqClass";
 
 const router = createBrowserRouter([
   {
@@ -53,7 +54,11 @@ const router = createBrowserRouter([
       // admin routes
       {
         path: "users",
-        element: <AllUsers></AllUsers>,
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
       },
       {
         path: "teacherRequest",
@@ -69,8 +74,9 @@ const router = createBrowserRouter([
       },
       {
         path: "adminAllclasses",
-        element: <AdminClass></AdminClass>,
+        element: <AllReqClass></AllReqClass>,
       },
+      // teacher route
       {
         path: "addClasses",
         element: <AddClasses></AddClasses>,

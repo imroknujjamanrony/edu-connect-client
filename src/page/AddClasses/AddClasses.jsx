@@ -1,3 +1,4 @@
+//after adding cloudinary
 import { useState } from "react";
 import { imageUpload } from "../../components/api/utils";
 import useAuth from "../../hooks/useAuth";
@@ -14,29 +15,36 @@ const AddClasses = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     const form = e.target;
     const title = form.title.value;
     const price = parseFloat(form.price.value);
     const description = form.description.value;
-    const image = form.image.files[0];
-    const imageUrl = await imageUpload(image);
-    const publisher = {
-      name: user?.displayName,
-      email: user?.email,
-      image: user?.photoURL,
-    };
 
-    // Create add classes and send to db
-    const classData = {
-      title,
-      price,
-      description,
-      image: imageUrl,
-      publisher,
-    };
+    const image = form.image.files[0];
 
     try {
+      // Upload image to Cloudinary and get the URL
+      const imageUrl = await imageUpload(image);
+
+      const publisher = {
+        name: user?.displayName,
+        email: user?.email,
+        image: user?.photoURL,
+      };
+
+      // Prepare the class data
+      const classData = {
+        title,
+        price,
+        description,
+        image: imageUrl,
+        publisher,
+      };
+
+      // Save the class data to the database
       await axiosSecure.post("/class", classData);
+
       Swal.fire({
         title: "Success",
         text: "Class Added Successfully.",
@@ -45,11 +53,16 @@ const AddClasses = () => {
       }).then(() => {
         // Reset the form
         form.reset();
-        // Reset the upload button text
         setuploadButtonText("upload image");
       });
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      console.error("Failed to add class:", error);
+      Swal.fire({
+        title: "Error",
+        text: "Failed to add the class. Please try again.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
     } finally {
       setLoading(false);
     }
@@ -90,7 +103,7 @@ const AddClasses = () => {
               name="name"
               id="name"
               type="text"
-              value={user?.displayName} // Example value, replace with dynamic value as needed
+              value={user?.displayName}
               readOnly
             />
           </div>
@@ -105,7 +118,7 @@ const AddClasses = () => {
               name="email"
               id="email"
               type="email"
-              value={user?.email} // Example value, replace with dynamic value as needed
+              value={user?.email}
               readOnly
             />
           </div>
@@ -170,7 +183,7 @@ const AddClasses = () => {
           type="submit"
           className="w-full p-3 mt-8 text-center font-medium text-white bg-[#2563EB] rounded-md hover:bg-lime-600 transition duration-200"
         >
-          Add Class
+          {loading ? "Loading..." : "Add Class"}
         </button>
       </form>
     </div>
