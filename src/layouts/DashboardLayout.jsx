@@ -1,24 +1,15 @@
+import useAuth from "../hooks/useAuth";
 import Dashboard from "../page/dashboard/Dashboard";
 
 const DashboardLayout = () => {
+  const { user } = useAuth();
   return (
     <div>
+      <h2 className="text-4xl flex justify-center mt-5 font-bold text-green-600 ">
+        Welcome {user?.displayName}
+      </h2>
       <Dashboard></Dashboard>
     </div>
-    // <div className="dashboard-layout flex min-h-screen bg-gray-100">
-    //   <aside className="dashboard-sidebar  max-w-60 bg-blue-600 text-white">
-    //     <div></div>
-    //     <div>
-    //       <StudentMenu></StudentMenu>
-    //     </div>
-    //     <div>
-    //       <TeacherMenu></TeacherMenu>
-    //     </div>
-    //   </aside>
-    //   <main className="dashboard-content flex-1  bg-white">
-    //     <Outlet />
-    //   </main>
-    // </div>
   );
 };
 

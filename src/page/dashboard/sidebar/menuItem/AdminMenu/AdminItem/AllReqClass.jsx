@@ -164,11 +164,10 @@ const AllReqClass = () => {
       return data;
     },
   });
-  console.log(allClasses);
 
   const handleApprove = (classItem) => {
     const updateState = {
-      status: "approve",
+      status: "approved",
     };
     axios
       .patch(
@@ -298,35 +297,39 @@ const AllReqClass = () => {
                     className="w-16 h-16 object-cover rounded"
                   />
                 </td>
-                <td className="px-4 py-2 border">{classItem.email}</td>
+                <td className="px-4 py-2 border">
+                  {classItem.publisher.email}
+                </td>
                 <td className="px-4 py-2 border">{classItem.description}</td>
                 <td className="px-4 py-2 border">${classItem.price}</td>
                 <td className="px-4 py-2 border">
                   {classItem.status === "approve" ? (
                     <span className="text-green-600">Accepted</span>
                   ) : classItem.status === "rejected" ? (
-                    <span className="text-red-600">rejected</span>
+                    <span className="text-red-600">Rejected</span>
                   ) : (
                     <span className="text-yellow-600">Pending</span>
                   )}
                 </td>
-                <td className="px-4 py-2 border space-x-2">
+                <td className="px-4 flex flex-col justify-between items-center py-2 border space-x-2">
                   {!classItem.status || classItem.status === "Pending" ? (
                     <>
                       <button
                         className="bg-green-500 text-white px-3 py-1 rounded flex items-center"
                         onClick={() => handleApprove(classItem)}
                       >
-                        <FaCheck className="mr-1" /> Approve
+                        <FaCheck className="mr-1" />
                       </button>
                       <button
                         className="bg-red-500 text-white px-3 py-1 rounded flex items-center"
                         onClick={() => handleReject(classItem)}
                       >
-                        <FaTimes className="mr-1" /> Reject
+                        <FaTimes className="mr-1" />
                       </button>
                     </>
-                  ) : null}
+                  ) : (
+                    <FaCheck></FaCheck>
+                  )}
                 </td>
               </tr>
             ))}

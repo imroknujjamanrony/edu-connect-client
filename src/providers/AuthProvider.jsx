@@ -103,10 +103,10 @@ const AuthProvider = ({ children }) => {
 
             // Update the Axios global Authorization header
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-            console.log(
-              "Updated Authorization Header:",
-              axios.defaults.headers.common["Authorization"]
-            );
+            // console.log(
+            //   "Updated Authorization Header:",
+            //   axios.defaults.headers.common["Authorization"]
+            // );
           }
         } catch (error) {
           console.error(
