@@ -59,9 +59,12 @@ const MyClass = () => {
     });
   };
 
-  const handleSeeDetailsClick = (classId) => {
-    navigate(`/dashboard/my-class/${classId}`);
+  const handleSeeDetailsClick = (classItem) => {
+    // navigate(`/dashboard/my-class/${classId}`);
+    navigate(`/class/${classItem.id}`);
   };
+
+  // onClick={() => navigate(`/class/${classItem._id}`)}
 
   const handleModalClose = () => {
     setUpdateModalOpen(false);

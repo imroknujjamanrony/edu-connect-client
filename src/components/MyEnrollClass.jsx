@@ -1,41 +1,62 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const MyEnrollClass = () => {
-  const [classes, setClasses] = useState([]);
+  const [enrolledClasses, setEnrolledClasses] = useState([]);
+  // const { user } = useAuth(); // Get logged-in user info
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch the enrolled classes from the server or a mock data source
-    const fetchClasses = async () => {
-      // Replace the following URL with your actual API endpoint
-      const response = await fetch("/api/enrolled-classes");
-      const data = await response.json();
-      setClasses(data);
-    };
-
-    fetchClasses();
-  }, []);
+    {
+      axiosSecure
+        .get(`/my-enrolled-class`)
+        .then((res) => {
+          setEnrolledClasses(res.data); // Update state with enrolled classes
+        })
+        .catch((err) => {
+          console.error("Error fetching enrolled classes:", err);
+        });
+    }
+  }, [axiosSecure]);
+  console.log(enrolledClasses);
 
   return (
-    <div className="my-enroll-class grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-      {classes.map((classItem) => (
-        <div
-          key={classItem.id}
-          className="card bg-white shadow-lg rounded-lg p-4"
-        >
-          <img
-            src={classItem.image}
-            alt={classItem.title}
-            className="h-48 w-full object-cover rounded-t-lg"
-          />
-          <div className="p-4">
-            <h2 className="text-lg font-semibold mb-2">{classItem.title}</h2>
-            <p className="text-gray-600 mb-4">Posted by: {classItem.name}</p>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {enrolledClasses.length > 0 ? (
+        enrolledClasses.map((enrolledClass) => (
+          <div
+            key={enrolledClass._id}
+            className="card shadow-lg p-4 rounded-xl"
+          >
+            <img
+              src={enrolledClass.myClass.image}
+              alt={enrolledClass.myClass.title}
+              className="rounded-lg w-full h-40 object-cover"
+            />
+            <h2 className="text-xl font-bold mt-4">
+              {enrolledClass.myClass.title}
+            </h2>
+            <p className="text-sm text-gray-600">
+              Posted by:{" "}
+              <span className="font-medium">
+                {enrolledClass.myClass.publisher.name}
+              </span>
+            </p>
+            <button
+              onClick={() => navigate(`/class-details/${enrolledClass._id}`)}
+              className="btn mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+            >
               Continue
             </button>
           </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <p className="col-span-full text-center text-gray-500">
+          No enrolled classes found.
+        </p>
+      )}
     </div>
   );
 };

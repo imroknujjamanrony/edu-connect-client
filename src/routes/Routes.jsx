@@ -15,6 +15,7 @@ import TeachersRequest from "../page/dashboard/sidebar/menuItem/AdminMenu/AdminI
 import AllUsers from "../page/dashboard/sidebar/menuItem/AdminMenu/AdminItem/AllUsers";
 import AdminRoute from "./AdminRoute";
 import AllReqClass from "../page/dashboard/sidebar/menuItem/AdminMenu/AdminItem/AllReqClass";
+import PaymentPage from "../page/payment/PaymentPage";
 
 const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
       {
         path: "myClass",
         element: <MyClass></MyClass>,
+      },
+      {
+        path: "payment",
+        element: <PaymentPage></PaymentPage>,
       },
     ],
   },

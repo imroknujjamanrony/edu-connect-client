@@ -43,6 +43,7 @@ const ClassCard = ({ classItem, onUpdate, onDelete, onSeeDetails }) => {
         onClick={() => onSeeDetails(classItem.id)}
       >
         See Details
+        {/* onClick={() => navigate(`/class/${classItem._id}`)} */}
       </button>
     </div>
   );

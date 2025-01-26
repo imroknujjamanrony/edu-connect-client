@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const ClassDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const {
     data: classDetails,
@@ -26,6 +27,11 @@ const ClassDetails = () => {
   if (error) {
     return <p>Error fetching class details</p>;
   }
+  const handlePurchase = (classDetails) => {
+    navigate("/dashboard/payment", {
+      state: { classDetails },
+    });
+  };
 
   return (
     <div className="container mx-auto p-6">
@@ -56,7 +62,16 @@ const ClassDetails = () => {
           <p className="text-sm text-gray-500">
             Total Enrolment: {classDetails.totalEnrolment}
           </p>
-          <button className="btn bg-blue-500">Enroll</button>
+          {/* <Link to="/dashboard/payment">
+            <button
+             onClick={() => handlePurchase(classDetail)} className="btn bg-blue-500">Enroll</button>
+          </Link> */}
+          <button
+            onClick={() => handlePurchase(classDetails)}
+            className="btn btn-info w-full"
+          >
+            Pay Now
+          </button>
         </div>
       </div>
     </div>
