@@ -1,4 +1,6 @@
 import Banner from "../../components/Home/Banner";
+import CoursesSection from "../../components/Home/CourseSection";
+import InspireTeacher from "../../components/Home/InspireTeacher";
 import HighlightedClass from "./HighlightedClass";
 import PartnersSection from "./PartnersSection";
 
@@ -8,6 +10,8 @@ const Home = () => {
       <Banner></Banner>
       <PartnersSection></PartnersSection>
       <HighlightedClass></HighlightedClass>
+      <InspireTeacher></InspireTeacher>
+      <CoursesSection></CoursesSection>
     </div>
   );
 };

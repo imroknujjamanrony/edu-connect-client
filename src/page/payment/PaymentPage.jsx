@@ -9,7 +9,9 @@ const PaymentPage = () => {
   return (
     <div>
       <div className="my-10">
-        <h1 className="text-3xl text-green-300 font-bold">Payments</h1>
+        <h1 className="text-3xl text-green-300 flex justify-center font-bold">
+          Payments
+        </h1>
       </div>
       <div>
         <Elements stripe={stripePromise}>
