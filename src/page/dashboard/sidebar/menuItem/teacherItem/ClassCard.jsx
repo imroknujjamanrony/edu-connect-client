@@ -40,10 +40,9 @@ const ClassCard = ({ classItem, onUpdate, onDelete, onSeeDetails }) => {
           classItem.status !== "approved" && "opacity-50 cursor-not-allowed"
         }`}
         disabled={classItem.status !== "approved"}
-        onClick={() => onSeeDetails(classItem.id)}
+        onClick={() => onSeeDetails(classItem._id)}
       >
         See Details
-        {/* onClick={() => navigate(`/class/${classItem._id}`)} */}
       </button>
     </div>
   );

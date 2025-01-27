@@ -18,7 +18,7 @@ const MyClass = () => {
     queryKey: ["myClasses"],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
-        `${import.meta.env.VITE_API_URL}/myClasses`
+        `${import.meta.env.VITE_API_URL}/my-classes`
       );
       return data;
     },
@@ -60,11 +60,8 @@ const MyClass = () => {
   };
 
   const handleSeeDetailsClick = (classItem) => {
-    // navigate(`/dashboard/my-class/${classId}`);
-    navigate(`/class/${classItem.id}`);
+    navigate(`/dashboard/my-class/${classItem}`);
   };
-
-  // onClick={() => navigate(`/class/${classItem._id}`)}
 
   const handleModalClose = () => {
     setUpdateModalOpen(false);
