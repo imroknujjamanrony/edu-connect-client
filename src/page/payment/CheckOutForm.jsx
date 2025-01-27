@@ -96,7 +96,7 @@ const CheckOutForm = () => {
           myClass: classDetails,
         };
         const res = await axiosSecure.post("/payments", payment);
-        console.log(res.data, "payment saved");
+        // console.log(res.data, "payment saved");
       }
     }
   };

@@ -17,6 +17,7 @@ import AdminRoute from "./AdminRoute";
 import AllReqClass from "../page/dashboard/sidebar/menuItem/AdminMenu/AdminItem/AllReqClass";
 import PaymentPage from "../page/payment/PaymentPage";
 import MyClassDetails from "../page/dashboard/sidebar/menuItem/teacherItem/MyClassDetails";
+import MyenrollDetails from "../components/MyEnrollDetails";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "my-enroll-class",
         element: <MyEnrollclass></MyEnrollclass>,
+      },
+      {
+        path: "my-enroll-class/:id",
+        element: <MyenrollDetails></MyenrollDetails>,
       },
       {
         path: "profile",

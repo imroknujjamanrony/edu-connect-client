@@ -187,10 +187,11 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { FaBook, FaHome, FaUser } from "react-icons/fa";
 import useAdmin from "../../hooks/useAdmin";
+import useMakeTeacher from "../../hooks/useMakeTeacher";
 
 const Dashboard = () => {
   const [isAdmin] = useAdmin();
-  const isTeacher = true;
+  const [isTeacher] = useMakeTeacher();
   return (
     <div className="dashboard-layout flex min-h-screen bg-gray-100">
       <aside className="dashboard-sidebar  max-w-60 bg-blue-600 text-white">

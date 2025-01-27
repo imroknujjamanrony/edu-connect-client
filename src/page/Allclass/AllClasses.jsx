@@ -46,7 +46,7 @@ const AllClasses = () => {
               Description: {classItem.description}
             </p>
             <p className="text-sm text-gray-600">
-              Total Enrolment: {classItem.totalEnrolment}
+              Total Enrolment: {classItem.enroll}
             </p>
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md mt-4"

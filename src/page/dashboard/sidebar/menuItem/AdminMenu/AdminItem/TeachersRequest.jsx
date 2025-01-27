@@ -21,11 +21,10 @@ const TeachersRequest = () => {
       return data;
     },
   });
-  // console.log(allTeacherRequests);
 
   const handleApprove = (teacherRequest) => {
     const updateState = {
-      status: "approved",
+      role: "teacher",
     };
     axios
       .patch(
@@ -40,7 +39,7 @@ const TeachersRequest = () => {
           Swal.fire({
             position: "top-end",
             timer: 1500,
-            title: `${teacherRequest.status}  now.`,
+            title: `${teacherRequest?.role}  now.`,
             text: "Approved successfully.",
             icon: "success",
             confirmButtonText: "OK",
@@ -90,7 +89,9 @@ const TeachersRequest = () => {
 
   return (
     <div className="p-5">
-      <h2 className="text-2xl font-semibold mb-5">All Requested Classes</h2>
+      <h2 className="text-2xl font-semibold mb-5">
+        All Requested For Teaching
+      </h2>
       <div className="overflow-x-auto">
         <table className="table-auto w-full border-collapse border border-gray-200">
           <thead>
@@ -124,17 +125,16 @@ const TeachersRequest = () => {
                   ${teacherRequest?.category}
                 </td>
                 <td className="px-4 py-2 border">
-                  {teacherRequest.status === "approved" ? (
+                  {teacherRequest.role === "teacher" ? (
                     <span className="text-green-600">Accepted</span>
-                  ) : teacherRequest.status === "rejected" ? (
+                  ) : teacherRequest.role === "rejected" ? (
                     <span className="text-red-600">Rejected</span>
                   ) : (
                     <span className="text-yellow-600">pending</span>
                   )}
                 </td>
                 <td className="px-4 flex flex-col justify-between items-center py-2 border space-x-2">
-                  {!teacherRequest.status ||
-                  teacherRequest.status === "pending" ? (
+                  {!teacherRequest.role || teacherRequest.role === "pending" ? (
                     <>
                       <button
                         className="bg-green-500 text-white px-3 py-1 rounded flex items-center"

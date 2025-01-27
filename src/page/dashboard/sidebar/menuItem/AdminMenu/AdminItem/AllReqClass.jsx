@@ -60,7 +60,7 @@ const AllReqClass = () => {
             position: "top-end",
             timer: 1500,
             title: `${classItem.status}  now.`,
-            text: "Approved successfully.",
+            text: "Rejected successfully.",
             icon: "success",
             confirmButtonText: "OK",
           });

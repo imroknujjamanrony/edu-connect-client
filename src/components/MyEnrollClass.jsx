@@ -21,6 +21,12 @@ const MyEnrollClass = () => {
     }
   }, [axiosSecure]);
 
+  const enrollHandler = (enrolledClass) => {
+    navigate(`/dashboard/my-enroll-class/${enrolledClass._id}`, {
+      state: { enrolledClass }, // Pass data as state
+    });
+  };
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {enrolledClasses.length > 0 ? (
@@ -44,7 +50,7 @@ const MyEnrollClass = () => {
               </span>
             </p>
             <button
-              onClick={() => navigate(`/class-details/${enrolledClass._id}`)}
+              onClick={() => enrollHandler(enrolledClass)}
               className="btn mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
             >
               Continue
