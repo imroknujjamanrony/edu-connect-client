@@ -1,57 +1,13 @@
-// import { useQuery } from "@tanstack/react-query";
-// import useAxiosSecure from "../../hooks/useAxiosSecure";
-// import axios from "axios";
-
-// const Stats = () => {
-//   const axiosSecure = useAxiosSecure();
-//   const {
-//     data: users,
-//     isLoading,
-//     error,
-//   } = useQuery({
-//     queryKey: ["users"],
-//     queryFn: async () => {
-//       const { data } = await axiosSecure.get(
-//         `${import.meta.env.VITE_API_URL}/users`
-//       );
-//       return data;
-//     },
-//   });
-
-//   const { data: allClasses } = useQuery({
-//     queryKey: ["allClasses"],
-//     queryFn: async () => {
-//       const { data } = await axios(
-//         `${import.meta.env.VITE_API_URL}/allClasses`
-//       );
-//       return data;
-//     },
-//   });
-
-//   return (
-//     <div>
-//       <h2>Total Users:{users.length}</h2>
-//       <h2>Total Classes:{allClasses.length}</h2>
-//     </div>
-//   );
-// };
-
-// export default Stats;
-
-//
-
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+// import useAxiosSecure from "../../hooks/useAxiosSecure";
 import axios from "axios";
 
 const Stats = () => {
-  const axiosSecure = useAxiosSecure();
+  // const axiosSecure = useAxiosSecure();
   const { data: users } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(
-        `${import.meta.env.VITE_API_URL}/users`
-      );
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/users`);
       return data;
     },
   });
