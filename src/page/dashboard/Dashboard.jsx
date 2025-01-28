@@ -83,7 +83,8 @@ const Dashboard = () => {
                     </NavLink>
                   </li>
                   <div className="divider"></div>
-                  <li>
+
+                  {/* <li>
                     <NavLink
                       to="/"
                       className={({ isActive }) =>
@@ -150,7 +151,7 @@ const Dashboard = () => {
                       <FaUser />
                       <span>Teachers Profile</span>
                     </NavLink>
-                  </li>
+                  </li> */}
                 </>
               ) : isTeacher ? (
                 <>
@@ -234,6 +235,19 @@ const Dashboard = () => {
                     >
                       <FaBook />
                       <span>My Enroll Class</span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      to="/dashboard/profile"
+                      className={({ isActive }) =>
+                        `flex items-center space-x-2 text-lg font-medium transition-colors ${
+                          isActive ? "text-yellow-300" : "hover:text-yellow-300"
+                        }`
+                      }
+                    >
+                      <FaUser />
+                      <span>Student Profile</span>
                     </NavLink>
                   </li>
                 </>

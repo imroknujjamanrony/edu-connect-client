@@ -74,16 +74,6 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         const user = { email: currentUser.email };
 
-        //save info to in db
-        axios.post(
-          `${import.meta.env.VITE_API_URL}/users/${currentUser?.email}}`,
-          {
-            name: currentUser?.name,
-            image: currentUser?.photoURL,
-            email: currentUser?.email,
-          }
-        );
-
         // Fetch JWT token from the backend
         try {
           const res = await axios.post(

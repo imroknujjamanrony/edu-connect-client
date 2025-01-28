@@ -19,8 +19,8 @@ const CheckOutForm = () => {
   const { classDetails } = location.state || {};
 
   const price = parseInt(classDetails.price);
-  console.log(classDetails, "class details");
-  console.log(price);
+  // console.log(classDetails, "class details");
+  // console.log(price);
 
   useEffect(() => {
     if (classDetails && price > 0) {

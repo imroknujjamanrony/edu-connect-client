@@ -60,7 +60,7 @@ const ClassDetails = () => {
           </p>
 
           <p className="text-sm text-gray-500">
-            Total Enrolment: {classDetails.totalEnrolment}
+            Total Enrolment: {classDetails.enroll}
           </p>
           {/* <Link to="/dashboard/payment">
             <button

@@ -23,6 +23,7 @@ const MyProfile = () => {
     queryKey: ["userProfile"], // Unique key for caching
     queryFn: fetchUserProfile,
   });
+  console.log(profileData);
 
   // Loading state
   if (isLoading) {
@@ -63,6 +64,7 @@ const MyProfile = () => {
           <img
             className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-24 rounded-full border-4 border-white"
             src={profileData.image || "https://via.placeholder.com/150"}
+            referrerPolicy="no-referrer"
             alt="User Profile"
           />
         </div>

@@ -25,7 +25,7 @@ const AllClasses = () => {
   console.log(approvedClasses);
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-6">All Classes</h1>
+      <h1 className="text-3xl ml-8 font-bold mb-6">All Classes</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {approvedClasses.map((classItem) => (
           <div

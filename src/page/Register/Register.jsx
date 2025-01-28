@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { imageUpload } from "../../components/api/utils";
+import axios from "axios";
 
 const Register = () => {
   const { createUser, updateUserProfile } = useAuth();
@@ -10,8 +11,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
-    // const photoUrl = e.target.url.value;
-    // const number = e.target.number.value;
+
     const email = e.target.email.value;
     const password = e.target.password.value;
     const image = e.target.image.files[0];
@@ -32,11 +32,17 @@ const Register = () => {
 
     try {
       // User Registration
-      const result = await createUser(email, password);
-
-      // Save username & profile photo
-      await updateUserProfile(name, photoURL);
-      console.log(result);
+      createUser(email, password).then((res) => {
+        console.log(res);
+        updateUserProfile(name, photoURL).then((result) => {
+          axios.post(`${import.meta.env.VITE_API_URL}/users/${email}}`, {
+            name,
+            image: photoURL,
+            email,
+          });
+          console.log(result);
+        });
+      });
 
       // Navigate to the home page
       navigate("/");

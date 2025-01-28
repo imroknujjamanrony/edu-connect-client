@@ -18,6 +18,7 @@ import AllReqClass from "../page/dashboard/sidebar/menuItem/AdminMenu/AdminItem/
 import PaymentPage from "../page/payment/PaymentPage";
 import MyClassDetails from "../page/dashboard/sidebar/menuItem/teacherItem/MyClassDetails";
 import MyenrollDetails from "../components/MyEnrollDetails";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -34,11 +35,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/class/:id",
-        element: <ClassDetails></ClassDetails>,
+        element: (
+          <PrivateRoute>
+            <ClassDetails></ClassDetails>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/TeachOnWebsite",
-        element: <TeachOnWebsite></TeachOnWebsite>,
+        element: (
+          <PrivateRoute>
+            <TeachOnWebsite></TeachOnWebsite>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/register",
@@ -52,7 +61,11 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <DashboardLayout></DashboardLayout>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
     children: [
       // admin routes
       {

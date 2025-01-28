@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-// import useAxiosSecure from "../../hooks/useAxiosSecure";
 import axios from "axios";
 
 const Stats = () => {
-  // const axiosSecure = useAxiosSecure();
   const { data: users } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/users`);
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/users-stat`
+      );
       return data;
     },
   });
