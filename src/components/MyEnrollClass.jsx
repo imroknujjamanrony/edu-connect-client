@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import useAuth from "../hooks/useAuth";
 
 const MyEnrollClass = () => {
+  const { user } = useAuth();
   const [enrolledClasses, setEnrolledClasses] = useState([]);
   // const { user } = useAuth(); // Get logged-in user info
   const axiosSecure = useAxiosSecure();
@@ -11,7 +13,7 @@ const MyEnrollClass = () => {
   useEffect(() => {
     {
       axiosSecure
-        .get(`/my-enrolled-class`)
+        .get(`/my-enrolled-class/${user?.email}`)
         .then((res) => {
           setEnrolledClasses(res.data); // Update state with enrolled classes
         })
@@ -20,6 +22,7 @@ const MyEnrollClass = () => {
         });
     }
   }, [axiosSecure]);
+  console.log(enrolledClasses);
 
   const enrollHandler = (enrolledClass) => {
     navigate(`/dashboard/my-enroll-class/${enrolledClass._id}`, {

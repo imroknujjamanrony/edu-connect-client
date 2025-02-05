@@ -42,9 +42,7 @@ const AuthProvider = ({ children }) => {
   // Logout
   const logOut = async () => {
     setLoading(true);
-    await axios.get("https://edu-connect-server-ebon.vercel.app/logout", {
-      withCredentials: true,
-    });
+    await axios.get("https://edu-connect-server-ebon.vercel.app/logout");
     localStorage.removeItem("jwtToken"); // Remove JWT token on logout
     return signOut(auth);
   };
@@ -78,10 +76,10 @@ const AuthProvider = ({ children }) => {
         try {
           const res = await axios.post(
             `${import.meta.env.VITE_API_URL}/jwt`,
-            user,
-            {
-              withCredentials: true, // Ensure cookies are sent if required
-            }
+            user
+            // {
+            //   withCredentials: true, // Ensure cookies are sent if required
+            // }
           );
 
           if (res.data.success) {
