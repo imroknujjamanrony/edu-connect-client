@@ -288,11 +288,16 @@ const Navbar = () => {
                 className="w-10 h-10 rounded-full"
               />
               {dropdownOpen && (
-                <div className="absolute right-0 top-12 bg-white shadow-lg rounded-lg p-4 w-48">
-                  <p className="text-sm font-semibold">{userName}</p>
+                <div className="absolute right-0  top-12 bg-white shadow-lg rounded-lg p-4 w-48">
+                  <p className="text-base font-semibold">{userName}</p>
+                  <p className="text-base font-semibold">
+                    {" "}
+                    <NavLink to="/dashboard">Dashboard</NavLink>
+                  </p>
+
                   <button
                     onClick={handleLogout}
-                    className="mt-2 w-full text-left text-sm text-red-500 hover:bg-gray-100 p-2 rounded"
+                    className="mt-2 w-full text-left text-sm text-red-500 hover:bg-purple-400 p-2 rounded"
                   >
                     Logout
                   </button>

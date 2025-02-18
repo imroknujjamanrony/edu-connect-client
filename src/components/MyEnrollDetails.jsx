@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import ModalFeedBack from "../page/modal/ModalFeedBack";
 
 const MyEnrollDetails = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const location = useLocation();
   const { enrolledClass } = location.state || {};
   console.log(enrolledClass);
@@ -19,6 +22,14 @@ const MyEnrollDetails = () => {
       <h4 className="text-3xl text-green-500 font-bold flex text-center justify-center">
         My Assignments
       </h4>
+      <div className="flex justify-center items-center">
+        <button
+          className="btn btn-neutral text-xl"
+          onClick={() => setIsModalOpen(true)}
+        >
+          + Feedback Us
+        </button>
+      </div>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -47,6 +58,10 @@ const MyEnrollDetails = () => {
           </tbody>
         </table>
       </div>
+      <ModalFeedBack
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+      />
     </div>
   );
 };
