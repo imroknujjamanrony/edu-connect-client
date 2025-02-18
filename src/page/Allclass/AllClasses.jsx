@@ -114,11 +114,16 @@ const AllClasses = () => {
       <div className="flex justify-end mr-8 mb-4">
         <button
           onClick={sortAscending}
-          className="btn btn-outline btn-success mr-2"
+          className="btn btn-outline  bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 border-none shadow-lg
+ mr-2"
         >
           <FaSortAmountUp className="mr-2" /> Ascending Price
         </button>
-        <button onClick={sortDescending} className="btn btn-outline btn-error">
+        <button
+          onClick={sortDescending}
+          className="btn btn-outline btn bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 border-none shadow-lg
+"
+        >
           <FaSortAmountDown className="mr-2" /> Descending Price
         </button>
       </div>

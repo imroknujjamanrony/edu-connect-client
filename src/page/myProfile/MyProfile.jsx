@@ -99,7 +99,10 @@ const MyProfile = () => {
 
         {/* Update Profile Button */}
         <div className="flex justify-around px-4 pb-6">
-          <button className="bg-lime-500 text-white px-4 py-2 rounded hover:bg-lime-600">
+          <button
+            className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 border-none shadow-lg
+       hover:bg-lime-600"
+          >
             Update Profile
           </button>
         </div>

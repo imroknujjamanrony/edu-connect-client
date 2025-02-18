@@ -1,9 +1,12 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/education .png";
+import { FiSun, FiMoon } from "react-icons/fi";
+
 import useAuth from "../../../hooks/useAuth";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 const Navbar = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const { user, logOut } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -28,7 +31,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar fixed z-20 bg-red-500">
+    <div className="navbar fixed z-20 text-white bg-purple-600/30 backdrop-blur-md">
       {/* left side logo and text */}
       <div className="flex-1 lg:ml-12">
         <img className="w-14 rounded-2xl" src={logo} alt="Logo" />
@@ -48,6 +51,12 @@ const Navbar = () => {
           <NavLink to="/TeachOnWebsite" className="btn btn-ghost">
             Teach on EduConnect
           </NavLink>
+          {/* Theme Toggle Button */}
+          <div className="rounded-full flex justify-center items-center pl-2 pr-2 bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-white transition">
+            <button onClick={toggleTheme} className=" ">
+              {theme === "dark" ? <FiSun size={24} /> : <FiMoon size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu Button */}
@@ -369,20 +378,26 @@ export default Navbar;
 // export default Navbar;
 
 // for trying my self
+
 // import { Link, NavLink } from "react-router-dom";
 // import logo from "../../../assets/education .png";
 // import useAuth from "../../../hooks/useAuth";
 // import { useState } from "react";
-// import useAdmin from "../../../hooks/useAdmin";
-// import useMakeTeacher from "../../../hooks/useMakeTeacher";
 // import { FaBook, FaHome, FaUser } from "react-icons/fa";
+// import useMakeTeacher from "../../../hooks/useMakeTeacher";
+// import useAdmin from "../../../hooks/useAdmin";
+import { ThemeContext } from "../../../providers/ThemeContext";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 // const Navbar = () => {
-//   const { user, logOut } = useAuth();
+//   const { user, logOut, loading } = useAuth();
 //   const [dropdownOpen, setDropdownOpen] = useState(false);
 //   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-//   const [isAdmin] = useAdmin();
+//   const [isAdmin, isAdminLoading] = useAdmin();
 //   const [isTeacher] = useMakeTeacher();
+//   if (loading || isAdminLoading) {
+//     return <div className="flex justify-center items-center"> loading...</div>;
+//   }
 
 //   const userName = user?.displayName || "User"; // Fallback to "User" if displayName is not available
 
@@ -404,7 +419,7 @@ export default Navbar;
 //   };
 
 //   return (
-//     <div className="navbar fixed z-20 bg-red-500">
+//     <div className="navbar fixed z-20 text-white bg-purple-400">
 //       {/* left side logo and text */}
 //       <div className="flex-1 lg:ml-12">
 //         <img className="w-14 rounded-2xl" src={logo} alt="Logo" />
@@ -415,145 +430,174 @@ export default Navbar;
 //       <div className="flex-none lg:mr-12">
 //         {/* Desktop Links */}
 //         <div className="hidden sm:flex space-x-4">
-//           {isAdmin ? (
-//             <>
-//               {/* shared */}
-//               <li>
-//                 <NavLink
-//                   to="/"
-//                   className={({ isActive }) =>
-//                     `flex items-center space-x-2 text-lg font-medium transition-colors ${
-//                       isActive ? "text-yellow-300" : "hover:text-yellow-300"
-//                     }`
-//                   }
-//                 >
-//                   <FaHome />
-//                   <span>Home</span>
-//                 </NavLink>
-//               </li>
-//               <li>
-//                 <NavLink
-//                   to="/dashboard/profile"
-//                   className={({ isActive }) =>
-//                     `flex items-center space-x-2 text-lg font-medium transition-colors ${
-//                       isActive ? "text-yellow-300" : "hover:text-yellow-300"
-//                     }`
-//                   }
-//                 >
-//                   <FaUser />
-//                   <span>Admin Profile</span>
-//                 </NavLink>
-//               </li>
+//           <NavLink to="/" className="btn btn-ghost">
+//             Home
+//           </NavLink>
+//           <NavLink to="/all-classes" className="btn btn-ghost">
+//             All Classes
+//           </NavLink>
+//           <NavLink to="/TeachOnWebsite" className="btn btn-ghost">
+//             Teach on EduConnect
+//           </NavLink>
+//           <ul className="flex justify-center items-center">
+//             {isAdmin ? (
+//               <>
+//                 {/* shared */}
 
-//               <li>
-//                 <NavLink
-//                   to="teacherRequest"
-//                   className={({ isActive }) =>
-//                     `flex items-center space-x-2 text-lg font-medium transition-colors ${
-//                       isActive ? "text-yellow-300" : "hover:text-yellow-300"
-//                     }`
-//                   }
-//                 >
-//                   <FaHome />
-//                   <span>Teachers Request</span>
-//                 </NavLink>
-//               </li>
-//               <li>
-//                 <NavLink
-//                   to="users"
-//                   className={({ isActive }) =>
-//                     `flex items-center space-x-2 text-lg font-medium transition-colors ${
-//                       isActive ? "text-yellow-300" : "hover:text-yellow-300"
-//                     }`
-//                   }
-//                 >
-//                   <FaUser />
-//                   <span>Users</span>
-//                 </NavLink>
-//               </li>
-//               <li>
-//                 <NavLink
-//                   to="/dashboard/adminAllclasses"
-//                   className={({ isActive }) =>
-//                     `flex items-center space-x-2 text-lg font-medium transition-colors ${
-//                       isActive ? "text-yellow-300" : "hover:text-yellow-300"
-//                     }`
-//                   }
-//                 >
-//                   <FaBook />
-//                   <span>All classes</span>
-//                 </NavLink>
-//               </li>
-//               <div className="divider"></div>
-//             </>
-//           ) : isTeacher ? (
-//             <>
-//               <li>
-//                 <NavLink
-//                   to="/"
-//                   className={({ isActive }) =>
-//                     `flex items-center space-x-2 text-lg font-medium transition-colors ${
-//                       isActive ? "text-yellow-300" : "hover:text-yellow-300"
-//                     }`
-//                   }
-//                 >
-//                   <FaHome />
-//                   <span>Home</span>
-//                 </NavLink>
-//               </li>
-//               <li>
-//                 <NavLink
-//                   to="/dashboard/addClasses"
-//                   className={({ isActive }) =>
-//                     `flex items-center space-x-2 text-lg font-medium transition-colors ${
-//                       isActive ? "text-yellow-300" : "hover:text-yellow-300"
-//                     }`
-//                   }
-//                 >
-//                   <FaBook />
-//                   <span>Add class</span>
-//                 </NavLink>
-//               </li>
-//               <li>
-//                 <NavLink
-//                   to="/dashboard/myClass"
-//                   className={({ isActive }) =>
-//                     `flex items-center space-x-2 text-lg font-medium transition-colors ${
-//                       isActive ? "text-yellow-300" : "hover:text-yellow-300"
-//                     }`
-//                   }
-//                 >
-//                   <FaUser />
-//                   <span>My Class</span>
-//                 </NavLink>
-//               </li>
-//               <li>
-//                 <NavLink
-//                   to="/dashboard/profile"
-//                   className={({ isActive }) =>
-//                     `flex items-center space-x-2 text-lg font-medium transition-colors ${
-//                       isActive ? "text-yellow-300" : "hover:text-yellow-300"
-//                     }`
-//                   }
-//                 >
-//                   <FaUser />
-//                   <span>Teachers Profile</span>
-//                 </NavLink>
-//               </li>
-//             </>
-//           ) : (
-//             <>
-//               <NavLink to="/" className="btn btn-ghost">
-//                 Home
-//               </NavLink>
-//               <NavLink to="/all-classes" className="btn btn-ghost">
-//                 All Classes
-//               </NavLink>
-//               <NavLink to="/TeachOnWebsite" className="btn btn-ghost">
-//                 Teach on EduConnect
-//               </NavLink>
-//             </>
-//           )}
+//                 <li>
+//                   <NavLink
+//                     to="/dashboard/profile"
+//                     className={({ isActive }) =>
+//                       `flex items-center space-x-2 text-lg font-medium transition-colors ${
+//                         isActive ? "text-yellow-300" : "hover:text-yellow-300"
+//                       }`
+//                     }
+//                   >
+//                     <FaUser />
+//                     <span>Admin Profile</span>
+//                   </NavLink>
+//                 </li>
+
+//                 <li>
+//                   <NavLink
+//                     to="/dashboard/teacherRequest"
+//                     className={({ isActive }) =>
+//                       `flex items-center space-x-2 text-lg font-medium transition-colors ${
+//                         isActive ? "text-yellow-300" : "hover:text-yellow-300"
+//                       }`
+//                     }
+//                   >
+//                     <FaHome />
+//                     <span>Teachers Request</span>
+//                   </NavLink>
+//                 </li>
+//                 <li>
+//                   <NavLink
+//                     to="/dashboard/users"
+//                     className={({ isActive }) =>
+//                       `flex items-center space-x-2 text-lg font-medium transition-colors ${
+//                         isActive ? "text-yellow-300" : "hover:text-yellow-300"
+//                       }`
+//                     }
+//                   >
+//                     <FaUser />
+//                     <span>Users</span>
+//                   </NavLink>
+//                 </li>
+//                 <li>
+//                   <NavLink
+//                     to="/dashboard/adminAllclasses"
+//                     className={({ isActive }) =>
+//                       `flex items-center space-x-2 text-lg font-medium transition-colors ${
+//                         isActive ? "text-yellow-300" : "hover:text-yellow-300"
+//                       }`
+//                     }
+//                   >
+//                     <FaBook />
+//                     <span>All classes</span>
+//                   </NavLink>
+//                 </li>
+//                 <div className="divider"></div>
+//               </>
+//             ) : isTeacher ? (
+//               <>
+//                 <li>
+//                   <NavLink
+//                     to="/dashboard/addClasses"
+//                     className={({ isActive }) =>
+//                       `flex items-center space-x-2 text-lg font-medium transition-colors ${
+//                         isActive ? "text-yellow-300" : "hover:text-yellow-300"
+//                       }`
+//                     }
+//                   >
+//                     <FaBook />
+//                     <span>Add class</span>
+//                   </NavLink>
+//                 </li>
+//                 <li>
+//                   <NavLink
+//                     to="/dashboard/myClass"
+//                     className={({ isActive }) =>
+//                       `flex items-center space-x-2 text-lg font-medium transition-colors ${
+//                         isActive ? "text-yellow-300" : "hover:text-yellow-300"
+//                       }`
+//                     }
+//                   >
+//                     <FaUser />
+//                     <span>My Class</span>
+//                   </NavLink>
+//                 </li>
+//                 <li>
+//                   <NavLink
+//                     to="/dashboard/profile"
+//                     className={({ isActive }) =>
+//                       `flex items-center space-x-2 text-lg font-medium transition-colors ${
+//                         isActive ? "text-yellow-300" : "hover:text-yellow-300"
+//                       }`
+//                     }
+//                   >
+//                     <FaUser />
+//                     <span>Teachers Profile</span>
+//                   </NavLink>
+//                 </li>
+//               </>
+//             ) : (
+//               <>
+//                 {user ? (
+//                   <>
+//                     {" "}
+//                     <li>
+//                       <NavLink
+//                         to="/"
+//                         className={({ isActive }) =>
+//                           `flex items-center space-x-2 text-lg font-medium transition-colors ${
+//                             isActive
+//                               ? "text-yellow-300"
+//                               : "hover:text-yellow-300"
+//                           }`
+//                         }
+//                       >
+//                         <FaHome />
+//                         <span>Home</span>
+//                       </NavLink>
+//                     </li>
+//                     <li>
+//                       <NavLink
+//                         to="/dashboard/my-enroll-class"
+//                         className={({ isActive }) =>
+//                           `flex items-center space-x-2 text-lg font-medium transition-colors ${
+//                             isActive
+//                               ? "text-yellow-300"
+//                               : "hover:text-yellow-300"
+//                           }`
+//                         }
+//                       >
+//                         <FaBook />
+//                         <span>My Enroll Class</span>
+//                       </NavLink>
+//                     </li>
+//                     <li>
+//                       <NavLink
+//                         to="/dashboard/profile"
+//                         className={({ isActive }) =>
+//                           `flex items-center space-x-2 text-lg font-medium transition-colors ${
+//                             isActive
+//                               ? "text-yellow-300"
+//                               : "hover:text-yellow-300"
+//                           }`
+//                         }
+//                       >
+//                         <FaUser />
+//                         <span>Student Profile</span>
+//                       </NavLink>
+//                     </li>
+//                   </>
+//                 ) : (
+//                   <></>
+//                 )}
+//               </>
+//             )}
+//           </ul>
 //         </div>
 
 //         {/* Mobile Menu Button */}

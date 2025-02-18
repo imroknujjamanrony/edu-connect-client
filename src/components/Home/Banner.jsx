@@ -31,7 +31,11 @@ const Banner = () => {
             <p className="text-lg">
               Experience the best services tailored for you.
             </p>
-            <Link to={"/all-classes"} className="btn mt-4 btn-success">
+            <Link
+              to={"/all-classes"}
+              className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 border-none shadow-lg
+ mt-4 "
+            >
               Go For Learn
             </Link>
           </div>
@@ -48,7 +52,11 @@ const Banner = () => {
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
             <h1 className="text-4xl font-bold mb-4">Achieve Your Goals</h1>
             <p className="text-lg">We help you unlock your potential.</p>
-            <Link to={"/all-classes"} className="btn mt-4 btn-success">
+            <Link
+              to={"/all-classes"}
+              className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 border-none shadow-lg
+ mt-4 "
+            >
               Go For Learn
             </Link>
           </div>
@@ -65,7 +73,11 @@ const Banner = () => {
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
             <h1 className="text-4xl font-bold mb-4">Join Our Community</h1>
             <p className="text-lg">Connect, learn, and grow together.</p>
-            <Link to={"/all-classes"} className="btn mt-4 btn-success">
+            <Link
+              to={"/all-classes"}
+              className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 border-none shadow-lg
+  mt-4 "
+            >
               Go For Learn
             </Link>
           </div>
