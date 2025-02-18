@@ -3,7 +3,7 @@ import useAxiosSecure from "./useAxiosSecure";
 import useAuth from "./useAuth";
 
 const useMakeTeacher = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   const {
@@ -12,6 +12,7 @@ const useMakeTeacher = () => {
     error,
   } = useQuery({
     queryKey: [user?.email, "isTeacher"],
+    enabled: !!user?.email && !loading,
     queryFn: async () => {
       const res = await axiosSecure.get(`/teacher-req/teacher/${user?.email}`);
       return res.data?.teacher;

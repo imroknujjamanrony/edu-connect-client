@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
   // Logout
   const logOut = async () => {
     setLoading(true);
-    await axios.get("https://edu-connect-server-ebon.vercel.app/logout");
+    await axios.get("http://localhost:5000/logout");
     localStorage.removeItem("jwtToken"); // Remove JWT token on logout
     return signOut(auth);
   };
