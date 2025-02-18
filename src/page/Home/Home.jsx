@@ -7,13 +7,15 @@ import PartnersSection from "./PartnersSection";
 
 const Home = () => {
   return (
-    <div className="w-11/12 mx-auto">
+    <div>
       <Banner></Banner>
-      <PartnersSection></PartnersSection>
-      <Stats></Stats>
-      <HighlightedClass></HighlightedClass>
-      <InspireTeacher></InspireTeacher>
-      <CoursesSection></CoursesSection>
+      <div className="w-11/12 mx-auto">
+        <PartnersSection></PartnersSection>
+        <Stats></Stats>
+        <HighlightedClass></HighlightedClass>
+        <InspireTeacher></InspireTeacher>
+        <CoursesSection></CoursesSection>
+      </div>
     </div>
   );
 };

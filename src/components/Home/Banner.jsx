@@ -1,13 +1,14 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-import banner1 from "./../../assets/banner-1.jpeg";
+import banner1 from "./../../assets/banner1.jpeg";
 import banner2 from "./../../assets/banner-2.jpeg";
 import banner3 from "./../../assets/banner-3.jpeg";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
-    <div className="relative">
+    <div className="relative -mt-5">
       <Carousel
         autoPlay
         infiniteLoop
@@ -30,6 +31,9 @@ const Banner = () => {
             <p className="text-lg">
               Experience the best services tailored for you.
             </p>
+            <Link to={"/all-classes"} className="btn mt-4 btn-success">
+              Go For Learn
+            </Link>
           </div>
         </div>
 
@@ -44,6 +48,9 @@ const Banner = () => {
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
             <h1 className="text-4xl font-bold mb-4">Achieve Your Goals</h1>
             <p className="text-lg">We help you unlock your potential.</p>
+            <Link to={"/all-classes"} className="btn mt-4 btn-success">
+              Go For Learn
+            </Link>
           </div>
         </div>
 
@@ -58,6 +65,9 @@ const Banner = () => {
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
             <h1 className="text-4xl font-bold mb-4">Join Our Community</h1>
             <p className="text-lg">Connect, learn, and grow together.</p>
+            <Link to={"/all-classes"} className="btn mt-4 btn-success">
+              Go For Learn
+            </Link>
           </div>
         </div>
       </Carousel>

@@ -31,7 +31,7 @@ const collaborators = [
 
 const PartnersSection = () => {
   return (
-    <section className="partners-section py-10 px-5 bg-gray-100">
+    <section className="partners-section  py-10 px-5 bg-gray-100">
       <h2 className="text-3xl font-bold text-center mb-8">
         Our Partners & Collaborators
       </h2>

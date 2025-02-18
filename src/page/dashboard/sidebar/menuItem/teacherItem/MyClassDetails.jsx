@@ -26,7 +26,6 @@ const MyClassDetails = () => {
       return data;
     },
   });
-  // console.log(classDetails);
 
   if (isLoading) {
     return <span className="loading loading-spinner text-success"></span>;
@@ -45,7 +44,6 @@ const MyClassDetails = () => {
     const description = form.description.value;
     const marks = form.marks.value;
     const date = form.date.value;
-    console.table({ name, title, description, marks, date });
 
     const assignmentData = {
       name,
@@ -62,7 +60,6 @@ const MyClassDetails = () => {
         assignmentData
       );
 
-      // console.log("Assignment updated successfully", response.data);
       Swal.fire({
         position: "top-end",
         icon: "success",

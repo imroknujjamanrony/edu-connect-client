@@ -43,16 +43,16 @@ const HighlightedClass = () => {
               className="w-full h-48 object-cover rounded-lg mb-4"
             />
             <h2 className="text-xl font-bold">{classItem.title}</h2>
-            <p className="text-sm text-gray-600">
+            {/* <p className="text-sm text-gray-600">
               Name: {classItem.publisher.name}
-            </p>
+            </p> */}
             <p className="text-sm text-gray-600">Price: ${classItem.price}</p>
             <p className="text-sm text-gray-600 mb-4">
               Description: {classItem.description}
             </p>
-            <p className="text-sm text-gray-600">
+            {/* <p className="text-sm text-gray-600">
               Total Enrollment: {classItem.enroll}
-            </p>
+            </p> */}
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded-md mt-4"
               onClick={() => navigate(`/class/${classItem._id}`)}
