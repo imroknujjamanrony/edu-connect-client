@@ -4,6 +4,7 @@ import InspireTeacher from "../../components/Home/InspireTeacher";
 import Stats from "../../components/Home/Stats";
 import HighlightedClass from "./HighlightedClass";
 import PartnersSection from "./PartnersSection";
+import Faq from "../../components/Faq";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
         <HighlightedClass></HighlightedClass>
         <InspireTeacher></InspireTeacher>
         <CoursesSection></CoursesSection>
+        <Faq></Faq>
       </div>
     </div>
   );

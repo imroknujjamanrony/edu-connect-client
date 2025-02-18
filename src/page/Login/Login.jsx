@@ -1,14 +1,21 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import { useState } from "react";
 
 const Login = () => {
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+
   const navigate = useNavigate();
-  const { LogIn, signInWithGoogle } = useAuth();
+  const { LogIn, signInWithGoogle, loading } = useAuth();
+  if (loading) {
+    return <span className="loading loading-infinity loading-lg"></span>;
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+    const { email, password } = credentials;
+    // const email = e.target.email.value;
+    // const password = e.target.password.value;
 
     // Log in
     try {
@@ -28,6 +35,16 @@ const Login = () => {
     }
   };
 
+  const fillCredentials = (role) => {
+    if (role === "admin") {
+      setCredentials({ email: "instructor@gmail.com", password: "1234Rr" });
+    } else if (role === "teacher") {
+      setCredentials({ email: "teacher@gmail.com", password: "1234Rr" });
+    } else {
+      setCredentials({ email: "check@gmail.com", password: "1234Rr" });
+    }
+  };
+
   return (
     <div className="min-h-screen flex justify-center items-center">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -40,6 +57,10 @@ const Login = () => {
               <span className="label-text">Email</span>
             </label>
             <input
+              value={credentials.email}
+              onChange={(e) =>
+                setCredentials({ ...credentials, email: e.target.value })
+              }
               type="email"
               name="email"
               placeholder="Email"
@@ -52,6 +73,10 @@ const Login = () => {
               <span className="label-text">Password</span>
             </label>
             <input
+              value={credentials.password}
+              onChange={(e) =>
+                setCredentials({ ...credentials, password: e.target.value })
+              }
               type="password"
               name="password"
               placeholder="Password"
@@ -79,6 +104,26 @@ const Login = () => {
             Register
           </Link>
         </p>
+      </div>
+      <div className="flex justify-evenly">
+        <button
+          className="btn btn-info"
+          onClick={() => fillCredentials("user")}
+        >
+          User Credentials
+        </button>
+        <button
+          className="btn btn-info"
+          onClick={() => fillCredentials("admin")}
+        >
+          Admin Credentials
+        </button>
+        <button
+          className="btn btn-info"
+          onClick={() => fillCredentials("teacher")}
+        >
+          Teacher Credentials
+        </button>
       </div>
     </div>
   );
