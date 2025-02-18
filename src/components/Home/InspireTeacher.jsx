@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 
 const InspireTeacher = () => {
   return (
-    <div className="flex items-center justify-center bg-gray-100 py-10 px-5">
+    <div
+      id="becomeTeacher"
+      className="flex items-center justify-center bg-gray-100 py-10 px-5"
+    >
       <div className="grid md:grid-cols-2 items-center gap-8 max-w-6xl mx-auto">
         {/* Left Section: Image */}
         <motion.div

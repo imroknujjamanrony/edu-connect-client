@@ -13,30 +13,47 @@ const Footer = () => {
 
       <nav>
         <h6 className="footer-title">Resources</h6>
-        <a className="link link-hover">Courses</a>
-        <a className="link link-hover">Tutors</a>
-        <a className="link link-hover">Workshops</a>
-        <a className="link link-hover">Certifications</a>
+        <a href="#course" className="link link-hover">
+          Courses
+        </a>
+        <a href="#becomeTeacher" className="link link-hover">
+          Become Tutor
+        </a>
+        <a href="#partners" className="link link-hover">
+          Partners
+        </a>
+        <a href="#stats" className="link link-hover">
+          stats
+        </a>
       </nav>
 
-      <nav>
+      {/* <nav>
         <h6 className="footer-title">Company</h6>
         <a className="link link-hover">About Us</a>
         <a className="link link-hover">Contact</a>
         <a className="link link-hover">Careers</a>
         <a className="link link-hover">Blog</a>
-      </nav>
+      </nav> */}
 
       <nav>
         <h6 className="footer-title">Follow Us</h6>
         <div className="grid grid-flow-col gap-4 text-lg">
-          <a href="#" className="hover:text-blue-600">
+          <a
+            href="https://www.facebook.com/imroknujjamanrony"
+            className="hover:text-blue-600"
+          >
             <FaFacebookF />
           </a>
-          <a href="#" className="hover:text-blue-400">
+          <a
+            href="https://x.com/RoknujjamanRon2"
+            className="hover:text-blue-400"
+          >
             <FaTwitter />
           </a>
-          <a href="#" className="hover:text-blue-700">
+          <a
+            href="www.linkedin.com/in/md-roknujjaman-rony-906780210"
+            className="hover:text-blue-700"
+          >
             <FaLinkedin />
           </a>
         </div>

@@ -109,7 +109,7 @@ const AllClasses = () => {
     sortedClasses.length > 0 ? sortedClasses : approvedClasses;
 
   return (
-    <div>
+    <div className="w-11/12 mx-auto">
       <h1 className="text-3xl ml-8 font-bold mb-6">All Classes</h1>
       <div className="flex justify-end mr-8 mb-4">
         <button
