@@ -19,6 +19,7 @@ import PaymentPage from "../page/payment/PaymentPage";
 import MyClassDetails from "../page/dashboard/sidebar/menuItem/teacherItem/MyClassDetails";
 import MyenrollDetails from "../components/MyEnrollDetails";
 import PrivateRoute from "./PrivateRoute";
+import Error from "../components/Error";
 
 const router = createBrowserRouter([
   {
@@ -114,6 +115,10 @@ const router = createBrowserRouter([
         element: <PaymentPage></PaymentPage>,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <Error></Error>,
   },
 ]);
 
