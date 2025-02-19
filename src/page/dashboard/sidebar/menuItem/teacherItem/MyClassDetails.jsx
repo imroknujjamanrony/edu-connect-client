@@ -134,7 +134,7 @@ const MyClassDetails = () => {
                       placeholder="Name"
                       readOnly
                       defaultValue={user?.displayName}
-                      className="input input-bordered w-full max-w-xs"
+                      className="input text-gray-300 input-bordered w-full max-w-xs"
                     />
                     <div className="label"></div>
                   </label>
@@ -181,7 +181,7 @@ const MyClassDetails = () => {
                       type="date"
                       name="date"
                       placeholder="Type here"
-                      className="input input-bordered w-full max-w-xs"
+                      className="input text-gray-300 input-bordered w-full max-w-xs"
                     />
                     <div className="label"></div>
                   </label>

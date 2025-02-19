@@ -91,18 +91,20 @@ const AllUsers = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Total Users: {users.length}</h2>
+    <div className="container mx-auto p-4 dark:bg-gray-900">
+      <h2 className="text-2xl font-bold mb-4 dark:text-white">
+        Total Users: {users.length}
+      </h2>
       <input
         type="text"
         placeholder="Search by name or email"
-        className="input input-bordered w-full mb-4"
+        className="input input-bordered w-full mb-4 dark:bg-gray-800 dark:text-white dark:border-gray-600"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
       <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
-          <thead>
+        <table className="table table-zebra w-full dark:bg-gray-800 dark:text-white">
+          <thead className="dark:bg-gray-700 dark:text-gray-300">
             <tr>
               <th>#</th>
               <th>Image</th>
@@ -114,24 +116,24 @@ const AllUsers = () => {
           </thead>
           <tbody>
             {filteredUsers.map((user, index) => (
-              <tr key={user._id}>
+              <tr key={user._id} className="dark:border-gray-700">
                 <td className="font-medium">{index + 1}</td>
                 <td>
                   <img
                     src={user.image}
                     alt={user.name}
-                    className="w-10 h-10 rounded-full"
+                    className="w-10 h-10 rounded-full border dark:border-gray-500"
                   />
                 </td>
                 <td className="font-medium">{user.name}</td>
-                <td>{user.email}</td>
+                <td className="dark:text-gray-300">{user.email}</td>
                 <td>
                   {user.role === "admin" ? (
-                    <FaUser className="text-xl" />
+                    <FaUser className="text-xl text-blue-500" />
                   ) : (
                     <button
                       onClick={() => handleMakeAdmin(user)}
-                      className="btn bg-orange-500 hover:bg-orange-600 text-white flex items-center gap-2 px-4 py-2 rounded-lg"
+                      className="btn bg-orange-500 hover:bg-orange-600 text-white flex items-center gap-2 px-4 py-2 rounded-lg dark:bg-orange-600 dark:hover:bg-orange-700"
                       disabled={user.role === "admin"}
                     >
                       <FaUser className="text-xl" />
@@ -141,7 +143,7 @@ const AllUsers = () => {
                 <td>
                   <button
                     onClick={() => handleDelete(user)}
-                    className="btn btn-ghost"
+                    className="btn btn-ghost dark:text-red-400 dark:hover:bg-red-500"
                   >
                     <FaTrashAlt />
                   </button>

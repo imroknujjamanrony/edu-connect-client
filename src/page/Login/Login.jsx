@@ -46,7 +46,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
+    <div className="min-h-screen flex gap-8 justify-center items-center">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
         <h2 className="text-gray-400 text-2xl font-medium text-center py-4">
           Login to Your Account
@@ -64,7 +64,7 @@ const Login = () => {
               type="email"
               name="email"
               placeholder="Email"
-              className="input input-bordered"
+              className="input text-gray-500 input-bordered"
               required
             />
           </div>
@@ -80,7 +80,7 @@ const Login = () => {
               type="password"
               name="password"
               placeholder="Password"
-              className="input input-bordered"
+              className="input text-gray-500 input-bordered"
               required
             />
             <label className="label">
@@ -98,32 +98,39 @@ const Login = () => {
             Sign in with Google
           </button>
         </div>
-        <p className="text-center font-semibold py-1">
+        <p className="text-center text-gray-500 font-semibold py-1">
           Don't have an account?{" "}
           <Link className="text-red-500" to="/register">
             Register
           </Link>
         </p>
       </div>
-      <div className="flex justify-evenly">
-        <button
-          className="btn btn-info"
-          onClick={() => fillCredentials("user")}
-        >
-          User Credentials
-        </button>
-        <button
-          className="btn btn-info"
-          onClick={() => fillCredentials("admin")}
-        >
-          Admin Credentials
-        </button>
-        <button
-          className="btn btn-info"
-          onClick={() => fillCredentials("teacher")}
-        >
-          Teacher Credentials
-        </button>
+      <div className="flex justify-between">
+        <div className="flex flex-col gap-4">
+          <h2 className="text-gray-400 font-bold text-3xl">
+            Demo Credentials For Check
+          </h2>
+          <div className="flex gap-4">
+            <button
+              className="btn btn-info"
+              onClick={() => fillCredentials("user")}
+            >
+              User Credentials
+            </button>
+            <button
+              className="btn btn-info"
+              onClick={() => fillCredentials("admin")}
+            >
+              Admin Credentials
+            </button>
+            <button
+              className="btn btn-info"
+              onClick={() => fillCredentials("teacher")}
+            >
+              Teacher Credentials
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

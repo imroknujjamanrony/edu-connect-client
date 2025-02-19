@@ -34,3 +34,41 @@ body {
 html.dark {
   @apply bg-gray-900 text-white;
 }
+
+/* Tailwind CSS classes used for responsiveness and sticky positioning */
+@layer utilities {
+  .sticky-top-0 {
+    position: sticky;
+    top: 0;
+  }
+}
+
+/* Ensure the dashboard layout is responsive */
+@media (min-width: 768px) {
+  .dashboard-layout {
+    flex-direction: row;
+  }
+  .dashboard-sidebar {
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+  }
+  .dashboard-content {
+    flex: 1;
+    margin-left: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-layout {
+    flex-direction: row;
+  }
+  .dashboard-sidebar {
+    width: 35%;
+    position:fixed;
+  }
+  .dashboard-content {
+    width: 100%;
+    margin-left: 140px;
+  }
+}

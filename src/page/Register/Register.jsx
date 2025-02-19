@@ -148,7 +148,7 @@ const Register = () => {
             <button className="btn btn-primary">Register</button>
           </div>
         </form>
-        <p className="text-center font-semibold py-1">
+        <p className="text-center text-gray-400 font-semibold py-1">
           Already have an account?{" "}
           <Link className="text-red-500" to="/login">
             Login
