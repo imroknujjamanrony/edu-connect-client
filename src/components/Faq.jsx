@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 const Faq = () => {
   const faqs = [
     {
@@ -27,6 +29,11 @@ const Faq = () => {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0, x: -100 },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
+  };
+
   return (
     <div className="max-w-3xl mx-auto p-6">
       <h2 className="text-3xl font-bold text-center mb-6">
@@ -34,18 +41,22 @@ const Faq = () => {
       </h2>
       <div className="space-y-4">
         {faqs.map((faq, index) => (
-          <div
+          <motion.div
             key={index}
             className="collapse collapse-plus border border-gray-300 bg-gray-100 rounded-lg"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.8 }}
+            variants={containerVariants}
           >
             <input type="checkbox" />
-            <div className="collapse-title text-lg font-medium">
+            <div className="collapse-title text-gray-700 text-lg font-medium">
               {faq.question}
             </div>
             <div className="collapse-content">
               <p className="text-gray-700">{faq.answer}</p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

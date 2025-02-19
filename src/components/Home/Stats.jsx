@@ -23,39 +23,42 @@ const Stats = () => {
   });
 
   return (
-    <div id="stats" className="flex justify-center space-x-8 my-10">
-      {/* Card for Total Users */}
-      <div className="bg-white p-6 rounded-lg shadow-lg w-80">
-        <div className="flex justify-center mb-4">
-          <img
-            src="https://i.ibb.co.com/Ph8mKK7/5.jpg" // Replace with a relevant image URL for users
-            alt="Users Icon"
-            className="w-16 h-16 object-cover"
-          />
+    <div id="stats" className="space-x-8 my-12">
+      <h1 className="text-3xl font-bold text-center mb-8">Stats</h1>
+      <div className="flex justify-center space-x-8 my-10">
+        {/* Card for Total Users */}
+        <div className="bg-white p-6 rounded-lg shadow-lg w-80">
+          <div className="flex justify-center mb-4">
+            <img
+              src="https://i.ibb.co.com/Ph8mKK7/5.jpg" // Replace with a relevant image URL for users
+              alt="Users Icon"
+              className="w-16 h-16 object-cover"
+            />
+          </div>
+          <h3 className="text-xl font-semibold text-center text-gray-700">
+            Total Users
+          </h3>
+          <p className="text-4xl font-bold text-center text-blue-600 mt-4">
+            {users?.length}
+          </p>
         </div>
-        <h3 className="text-xl font-semibold text-center text-gray-700">
-          Total Users
-        </h3>
-        <p className="text-4xl font-bold text-center text-blue-600 mt-4">
-          {users?.length}
-        </p>
-      </div>
 
-      {/* Card for Total Classes */}
-      <div className="bg-white p-6 rounded-lg shadow-lg w-80">
-        <div className="flex justify-center mb-4">
-          <img
-            src="https://i.ibb.co.com/jL4wpHj/total-recall-learning-how-to-learn-anything-faster-1024x555.png" // Replace with a relevant image URL for classes
-            alt="Classes Icon"
-            className="w-16 h-16 object-cover"
-          />
+        {/* Card for Total Classes */}
+        <div className="bg-white p-6 rounded-lg shadow-lg w-80">
+          <div className="flex justify-center mb-4">
+            <img
+              src="https://i.ibb.co.com/jL4wpHj/total-recall-learning-how-to-learn-anything-faster-1024x555.png" // Replace with a relevant image URL for classes
+              alt="Classes Icon"
+              className="w-16 h-16 object-cover"
+            />
+          </div>
+          <h3 className="text-xl font-semibold text-center text-gray-700">
+            Total Classes
+          </h3>
+          <p className="text-4xl font-bold text-center text-green-600 mt-4">
+            {allClasses?.length}
+          </p>
         </div>
-        <h3 className="text-xl font-semibold text-center text-gray-700">
-          Total Classes
-        </h3>
-        <p className="text-4xl font-bold text-center text-green-600 mt-4">
-          {allClasses?.length}
-        </p>
       </div>
     </div>
   );

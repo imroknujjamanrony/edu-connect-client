@@ -23,7 +23,7 @@ const Banner = () => {
           <img
             src={banner1}
             alt="Banner 1"
-            className="w-full h-[600px] object-cover"
+            className="w-full h-[550px] object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
@@ -34,7 +34,7 @@ const Banner = () => {
             <Link
               to={"/all-classes"}
               className="btn bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 border-none shadow-lg
- mt-4 "
+             mt-4 "
             >
               Go For Learn
             </Link>
@@ -46,7 +46,7 @@ const Banner = () => {
           <img
             src={banner2}
             alt="Banner 2"
-            className="w-full h-[600px] object-cover"
+            className="w-full h-[550px] object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">
@@ -67,7 +67,7 @@ const Banner = () => {
           <img
             src={banner3}
             alt="Banner 3"
-            className="w-full h-[600px] object-cover"
+            className="w-full h-[550px] object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white">

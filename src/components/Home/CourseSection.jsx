@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const CoursesSection = () => {
   return (
-    <div className="py-10 px-4 md:px-20 bg-gray-50">
+    <div className="py-10 px-4 md:px-20 ">
       <h2 className="text-3xl font-bold text-center mb-8">
         Explore Our Courses About
       </h2>
@@ -21,7 +21,9 @@ const CoursesSection = () => {
             />
           </figure>
           <div className="p-5">
-            <h3 className="text-xl font-semibold mb-2">Web Development</h3>
+            <h3 className="text-xl text-gray-600 font-semibold mb-2">
+              Web Development
+            </h3>
             <p className="text-gray-600 mb-4">
               Learn the skills to build modern, responsive websites and web
               applications.
@@ -42,7 +44,7 @@ const CoursesSection = () => {
             />
           </figure>
           <div className="p-5">
-            <h3 className="text-xl font-semibold mb-2">
+            <h3 className="text-xl text-gray-600 font-semibold mb-2">
               Artificial Intelligence
             </h3>
             <p className="text-gray-600 mb-4">
@@ -64,7 +66,9 @@ const CoursesSection = () => {
             />
           </figure>
           <div className="p-5">
-            <h3 className="text-xl font-semibold mb-2">Graphic Design</h3>
+            <h3 className="text-xl font-semibold mb-2 text-gray-600">
+              Graphic Design
+            </h3>
             <p className="text-gray-600 mb-4">
               Master the art of visual communication through design.
             </p>

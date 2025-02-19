@@ -5,7 +5,7 @@ const InspireTeacher = () => {
   return (
     <div
       id="becomeTeacher"
-      className="flex items-center justify-center bg-gray-100 py-10 px-5"
+      className="flex items-center justify-center bg-sectionColor mt-12 py-10 px-5"
     >
       <div className="grid md:grid-cols-2 items-center gap-8 max-w-6xl mx-auto">
         {/* Left Section: Image */}
@@ -33,7 +33,7 @@ const InspireTeacher = () => {
           <h2 className="text-3xl font-bold mb-4">
             Become an <span className="text-blue-600">Instructor</span>
           </h2>
-          <p className="text-gray-700 text-lg mb-6">
+          <p className="text- text-lg mb-6">
             Share your knowledge with learners worldwide. We provide the tools
             and support you need to inspire and teach what you love.
           </p>

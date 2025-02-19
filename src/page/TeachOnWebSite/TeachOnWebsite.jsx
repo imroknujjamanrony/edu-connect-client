@@ -1,6 +1,5 @@
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import axios from "axios";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
@@ -93,7 +92,7 @@ const TeachOnWebsite = () => {
               type="email"
               value={user?.email}
               readOnly
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-gray-100 rounded-md shadow-sm sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 text-gray-500 rounded-md shadow-sm sm:text-sm"
             />
           </div>
           <div>
@@ -111,14 +110,14 @@ const TeachOnWebsite = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-500">
               Experience
             </label>
             <select
               name="experience"
               value={formData.experience}
               onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full text-gray-500 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
               <option value="beginner">Beginner</option>
               <option value="mid-level">Mid-Level</option>
@@ -133,7 +132,7 @@ const TeachOnWebsite = () => {
               name="category"
               value={formData.category}
               onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full px-3 text-gray-500 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             >
               <option value="">Select a category</option>
               {categories.map((category) => (

@@ -4,7 +4,7 @@ import Footer from "../components/shared/Footer/Footer";
 
 const MainLayout = () => {
   return (
-    <div className="bg-gray-100 dark:bg-gray-800 transition-colors duration-300">
+    <div className="bg-primary text-textLight dark:bg-gray-800 transition-colors duration-300">
       <Navbar></Navbar>
 
       <div className="pt-24 min-h-[calc(100vh-68px)]">

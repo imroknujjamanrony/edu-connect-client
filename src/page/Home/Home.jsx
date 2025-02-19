@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <div>
       <Banner></Banner>
-      <div className="w-11/12 mx-auto bg-gray-100 dark:bg-gray-900">
+      <div className=" ">
         <PartnersSection></PartnersSection>
         <Stats></Stats>
         <HighlightedClass></HighlightedClass>

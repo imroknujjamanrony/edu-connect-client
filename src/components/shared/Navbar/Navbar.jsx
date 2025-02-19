@@ -222,8 +222,8 @@ const Navbar = () => {
 
   return (
     <div className="navbar fixed z-20 bg-red-500">
-      <div className="flex-1 lg:ml-12">
-        <img className="w-14" src={logo} alt="Logo" />
+      <div className="flex-1  lg:ml-12">
+        <img className="w-14 rounded-3xl " src={logo} alt="Logo" />
         <Link to="/" className="btn btn-ghost text-xl">
           EduConnect
         </Link>
@@ -244,15 +244,19 @@ const Navbar = () => {
           {/* Dashboard Links Based on Role */}
           {user && (
             <div className="dropdown dropdown-hover">
-              <button className="btn btn-ghost">Dashboard</button>
-              <ul className="dropdown-content bg-base-100 shadow-lg rounded-box p-2 w-52">
+              <button className="btn btn-ghost text-gray-700 dark:text-gray-200">
+                Dashboard
+              </button>
+              <ul className="dropdown-content bg-white dark:bg-gray-800 shadow-lg rounded-box p-2 w-52 border border-gray-200 dark:border-gray-700">
                 {dashboardLinks.map((link) => (
                   <li key={link.path}>
                     <NavLink
                       to={link.path}
                       className={({ isActive }) =>
-                        `block px-4 py-2 text-sm transition ${
-                          isActive ? "bg-gray-300" : "hover:bg-gray-200"
+                        `block px-4 py-2 text-sm transition rounded ${
+                          isActive
+                            ? "bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-200"
+                            : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
                         }`
                       }
                     >
@@ -287,17 +291,23 @@ const Navbar = () => {
                 alt="Profile"
                 className="w-10 h-10 rounded-full"
               />
+
               {dropdownOpen && (
-                <div className="absolute right-0  top-12 bg-white shadow-lg rounded-lg p-4 w-48">
-                  <p className="text-base font-semibold">{userName}</p>
-                  <p className="text-base font-semibold">
-                    {" "}
-                    <NavLink to="/dashboard">Dashboard</NavLink>
+                <div className="absolute right-0 top-12 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-4 w-48 border border-gray-200 dark:border-gray-700">
+                  <p className="text-base font-semibold text-gray-700 dark:text-white text-center">
+                    {userName}
                   </p>
+
+                  <NavLink
+                    to="/dashboard"
+                    className="block text-base font-semibold text-white bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-600 dark:to-purple-600 hover:opacity-90 px-3 py-2 rounded transition duration-200 text-center"
+                  >
+                    Dashboard
+                  </NavLink>
 
                   <button
                     onClick={handleLogout}
-                    className="mt-2 w-full text-left text-sm text-red-500 hover:bg-purple-400 p-2 rounded"
+                    className="mt-2 w-full text-sm bg-gradient-to-r from-blue-500 to-purple-500 hover:text-white hover:bg-red-500 dark:hover:bg-red-600 px-3 py-2 rounded transition duration-200"
                   >
                     Logout
                   </button>
@@ -307,7 +317,7 @@ const Navbar = () => {
           ) : (
             <NavLink
               to="/login"
-              className="btn btn-ghost bg-white text-red-500 hover:bg-gray-100"
+              className="btn block text-base font-semibold text-white bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-600 dark:to-purple-600 hover:opacity-90 px-3 py-2 rounded transition duration-200 text-center"
             >
               Sign In
             </NavLink>

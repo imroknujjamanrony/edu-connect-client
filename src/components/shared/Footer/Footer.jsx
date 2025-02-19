@@ -3,7 +3,7 @@ import { FaReact } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="footer bg-base-300 text-base-content p-10">
+    <footer className="footer bg-base-300 mt-12 text-base-content p-10">
       <div>
         <h6 className="footer-title flex items-center gap-2 text-xl font-bold">
           <FaReact className="text-blue-500" /> EduConnect
