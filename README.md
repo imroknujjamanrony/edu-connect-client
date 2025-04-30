@@ -39,6 +39,10 @@ EduConnect is a MERN (MongoDB, Express, React, Node.js) stack platform designed 
 - CRUD operations for managing classes, users, and assignments.
 - Real-time data fetching and updates with TanStack Query.
 
+### **AI Integration**
+
+- **Gemini AI Bot**: EduConnect includes a smart assistant powered by Google’s Gemini AI. This chatbot helps users—students, tutors, and admins—by answering questions, assisting with navigation, and providing educational support based on user queries. The integration enhances interactivity and improves the overall user experience.
+
 ### **Optional Advanced Features**
 
 - Dark/light theme toggle.
@@ -65,6 +69,7 @@ EduConnect is a MERN (MongoDB, Express, React, Node.js) stack platform designed 
 - TanStack Query for data fetching and caching
 - SweetAlert2 for elegant notifications
 - Cloudinary for image storage
+- **Gemini AI API** for chatbot functionality
 
 ## Project Requirements
 
@@ -82,50 +87,74 @@ EduConnect is a MERN (MongoDB, Express, React, Node.js) stack platform designed 
 Follow these steps to run the project on your local machine:
 
 1. Clone the repository:
-   bash
+
+   ```bash
    git clone https://github.com/yourusername/educonnect.git
    cd educonnect
+   ```
+
 2. Install the dependencies:
-   bash
 
-# Install backend dependencies
+   **Install backend dependencies**
 
-cd backend
-npm install
+   ```bash
+   cd backend
+   npm install
+   ```
 
-# Install frontend dependencies
+   **Install frontend dependencies**
 
-cd ../frontend
-npm install 3. Set up environment variables:
-Create a .env file in the backend directory and add the following variables:
+   ```bash
+   cd ../frontend
+   npm install
+   ```
 
-plaintext
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-FIREBASE_API_KEY=your_firebase_api_key
-FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
-FIREBASE_PROJECT_ID=your_firebase_project_id
-FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
-FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
-FIREBASE_APP_ID=your_firebase_app_id
-CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-CLOUDINARY_API_KEY=your_cloudinary_api_key
-CLOUDINARY_API_SECRET=your_cloudinary_api_secret 4. Run the backend server:
-bash
-cd backend
-npm start 5. Run the frontend server:
-bash
-cd ../frontend
-npm start 6. Access the project:
-Open your browser and navigate to https://edu-connect-server-ebon.vercel.app
+3. Set up environment variables:  
+   Create a `.env` file in the `backend` directory and add the following variables:
 
-Live Project Links & Resources
-Live Project: [Live-Link](https://educonnect-5a40e.web.app/)
+   ```plaintext
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   FIREBASE_API_KEY=your_firebase_api_key
+   FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+   FIREBASE_PROJECT_ID=your_firebase_project_id
+   FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+   FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+   FIREBASE_APP_ID=your_firebase_app_id
+   CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+   CLOUDINARY_API_KEY=your_cloudinary_api_key
+   CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+   GEMINI_API_KEY=your_gemini_api_key
+   ```
 
-Frontend Repository: GitHub - [EduConnect Frontend](https://github.com/imroknujjamanrony/edu-connect-client)
+4. Run the backend server:
 
-Backend Repository: GitHub - [EduConnect Backend](https://github.com/imroknujjamanrony/edu-connect-server)
+   ```bash
+   cd backend
+   npm start
+   ```
 
-Documentation: [EduConnect Docs](https://docs.google.com/document/d/1KLILVYU1j9hfFoING-O37VTesxbzEnBuJC0_trBIx2I/edit?pli=1&tab=t.0)
+5. Run the frontend server:
+
+   ```bash
+   cd ../frontend
+   npm start
+   ```
+
+6. Access the project:  
+   Open your browser and navigate to `https://edu-connect-server-ebon.vercel.app`
+
+---
+
+## Live Project Links & Resources
+
+- **Live Project:** [Live-Link](https://educonnect-5a40e.web.app/)
+- **Frontend Repository:** GitHub - [EduConnect Frontend](https://github.com/imroknujjamanrony/edu-connect-client)
+- **Backend Repository:** GitHub - [EduConnect Backend](https://github.com/imroknujjamanrony/edu-connect-server)
+- **Documentation:** [EduConnect Docs](https://docs.google.com/document/d/1KLILVYU1j9hfFoING-O37VTesxbzEnBuJC0_trBIx2I/edit?pli=1&tab=t.0)
+
+---
 
 EduConnect aims to simplify and optimize the education management system, offering a collaborative and interactive platform for users. For any questions or support, feel free to contact the development team.
+
+---
