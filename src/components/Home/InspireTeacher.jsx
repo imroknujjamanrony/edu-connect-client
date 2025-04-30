@@ -5,9 +5,9 @@ const InspireTeacher = () => {
   return (
     <div
       id="becomeTeacher"
-      className="flex items-center justify-center bg-sectionColor mt-12 py-10 px-5"
+      className="flex items-center justify-center bg-sectionColor mt-12 py-10 "
     >
-      <div className="grid md:grid-cols-2 items-center gap-8 max-w-6xl mx-auto">
+      <div className="grid md:grid-cols-2 items-center gap-4 px-4 max-w-7xl mx-auto">
         {/* Left Section: Image */}
         <motion.div
           className="relative w-full max-w-[300px] h-[300px] mx-auto md:mx-0"

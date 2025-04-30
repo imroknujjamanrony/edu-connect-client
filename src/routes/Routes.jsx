@@ -166,11 +166,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/class/:id",
-        element: (
-          <PrivateRoute>
-            <ClassDetails></ClassDetails>
-          </PrivateRoute>
-        ),
+        element: <ClassDetails></ClassDetails>,
       },
       {
         path: "/TeachOnWebsite",

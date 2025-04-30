@@ -54,7 +54,7 @@ const Navbar = () => {
       ];
 
   return (
-    <div className="navbar fixed z-20  bg-lime-500">
+    <div className="navbar fixed z-20  bg-sectionColor">
       <div className="flex-1  lg:ml-12">
         <img className="w-14 rounded-3xl " src={logo} alt="Logo" />
         <Link to="/" className="btn btn-ghost text-xl">

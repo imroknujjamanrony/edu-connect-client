@@ -31,7 +31,7 @@ const ModalFeedBack = ({ isOpen, onRequestClose }) => {
     };
     try {
       const response = await axios.post(
-        "http://localhost:5000/feedback",
+        "https://edu-connect-server-ebon.vercel.app/feedback",
         feedbackData
       ); // Send feedback data to the server
       Swal.fire({

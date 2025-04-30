@@ -117,7 +117,7 @@ npm start 5. Run the frontend server:
 bash
 cd ../frontend
 npm start 6. Access the project:
-Open your browser and navigate to http://localhost:5000
+Open your browser and navigate to https://edu-connect-server-ebon.vercel.app
 
 Live Project Links & Resources
 Live Project: [Live-Link](https://educonnect-5a40e.web.app/)

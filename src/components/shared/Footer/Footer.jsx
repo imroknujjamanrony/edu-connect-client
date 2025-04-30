@@ -3,7 +3,7 @@ import { FaReact } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="footer text-white bg-sectionColor mt-12  p-10">
+    <footer className=" flex flex-col md:flex-row justify-between py-8 px-8 text-white bg-sectionColor mt-12">
       <div>
         <h6 className="footer-title flex items-center gap-2 text-xl font-bold">
           <FaReact className="text-blue-500" /> EduConnect
@@ -11,31 +11,25 @@ const Footer = () => {
         <p>Empowering Learning, Connecting Educators & Students.</p>
       </div>
 
-      <nav>
+      <nav className="">
         <h6 className="footer-title">Resources</h6>
-        <a href="#course" className="link link-hover">
-          Courses
-        </a>
-        <a href="#becomeTeacher" className="link link-hover">
-          Become Tutor
-        </a>
-        <a href="#partners" className="link link-hover">
-          Partners
-        </a>
-        <a href="#stats" className="link link-hover">
-          stats
-        </a>
+        <div className="md:flex gap-2">
+          <a href="#course" className="link link-hover">
+            Courses
+          </a>
+          <a href="#becomeTeacher" className="link link-hover">
+            Become Tutor
+          </a>
+          <a href="#partners" className="link link-hover">
+            Partners
+          </a>
+          <a href="#stats" className="link link-hover">
+            stats
+          </a>
+        </div>
       </nav>
 
-      {/* <nav>
-        <h6 className="footer-title">Company</h6>
-        <a className="link link-hover">About Us</a>
-        <a className="link link-hover">Contact</a>
-        <a className="link link-hover">Careers</a>
-        <a className="link link-hover">Blog</a>
-      </nav> */}
-
-      <nav>
+      <nav className="flex justify-start">
         <h6 className="footer-title">Follow Us</h6>
         <div className="grid grid-flow-col gap-4 text-lg">
           <a

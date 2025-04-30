@@ -30,10 +30,13 @@ const SliderRev = () => {
   } = useQuery({
     queryKey: ["feedbacks"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/feedback");
+      const res = await axios.get(
+        "https://edu-connect-server-ebon.vercel.app/feedback"
+      );
       return res.data;
     },
   });
+  console.log(feedbacks);
 
   return (
     <div className="mt-20 max-w-screen-2xl mx-auto">
@@ -52,8 +55,8 @@ const SliderRev = () => {
           <p>No feedback available at the moment.</p>
         ) : (
           feedbacks.map((feedback, index) => (
-            <div key={index}>
-              <div className="bg-[#140c1c] p-6 rounded shadow-lg mb-4">
+            <div className="flex gap-2" key={index}>
+              <div className="bg-[#140c1c]  p-6 rounded shadow-lg mb-4">
                 <div className="flex justify-center items-center mb-2">
                   <img
                     src={feedback.user.image}

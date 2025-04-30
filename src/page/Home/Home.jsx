@@ -6,6 +6,7 @@ import HighlightedClass from "./HighlightedClass";
 import PartnersSection from "./PartnersSection";
 import Faq from "../../components/Faq";
 import FeedBackSection from "../../components/FeedbackSection";
+import GeminiUi from "../../components/gemini/GeminiUi";
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <div className=" ">
         <PartnersSection></PartnersSection>
         <Stats></Stats>
+        <GeminiUi></GeminiUi>
         <HighlightedClass></HighlightedClass>
         <InspireTeacher></InspireTeacher>
         <CoursesSection></CoursesSection>

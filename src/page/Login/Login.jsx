@@ -41,7 +41,7 @@ const Login = () => {
     } else if (role === "teacher") {
       setCredentials({ email: "teacher@gmail.com", password: "1234Rr" });
     } else {
-      setCredentials({ email: "check@gmail.com", password: "1234Rr" });
+      setCredentials({ email: "ping@gmail.com", password: "1234Rr" });
     }
   };
 
