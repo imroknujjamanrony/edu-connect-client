@@ -1,12 +1,12 @@
 import Banner from "../../components/Home/Banner";
 import CoursesSection from "../../components/Home/CourseSection";
 import InspireTeacher from "../../components/Home/InspireTeacher";
-import Stats from "../../components/Home/Stats";
 import HighlightedClass from "./HighlightedClass";
 import PartnersSection from "./PartnersSection";
 import Faq from "../../components/Faq";
 import FeedBackSection from "../../components/FeedbackSection";
 import GeminiUi from "../../components/gemini/GeminiUi";
+import StatsHome from "../../components/Home/StatsHome";
 
 const Home = () => {
   return (
@@ -14,7 +14,7 @@ const Home = () => {
       <Banner></Banner>
       <div className=" ">
         <PartnersSection></PartnersSection>
-        <Stats></Stats>
+        <StatsHome></StatsHome>
         <GeminiUi></GeminiUi>
         <HighlightedClass></HighlightedClass>
         <InspireTeacher></InspireTeacher>

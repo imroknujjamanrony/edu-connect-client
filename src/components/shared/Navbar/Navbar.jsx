@@ -1,14 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
-import logo from "../../../assets/4f984418-1b26-4f21-97be-1c6965c39022.jpg";
 import useAuth from "../../../hooks/useAuth";
 import useAdmin from "../../../hooks/useAdmin";
 import useMakeTeacher from "../../../hooks/useMakeTeacher";
 import { useContext, useState } from "react";
 import { ThemeContext } from "../../../providers/ThemeContext";
 import { FiMoon, FiSun } from "react-icons/fi";
+import { IoLogoReact } from "react-icons/io5";
+
 const Navbar = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
-
   const { user, logOut } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -34,7 +34,6 @@ const Navbar = () => {
     setMobileMenuOpen((prev) => !prev);
   };
 
-  // Define role-based links
   const dashboardLinks = isAdmin
     ? [
         { path: "/dashboard/profile", label: "Admin Profile" },
@@ -54,14 +53,16 @@ const Navbar = () => {
       ];
 
   return (
-    <div className="navbar fixed z-20  bg-sectionColor">
-      <div className="flex-1  lg:ml-12">
-        <img className="w-14 rounded-3xl " src={logo} alt="Logo" />
+    <div className="navbar fixed z-20 bg-sectionColor">
+      {/* Logo and Site Name */}
+      <div className="flex-1 lg:ml-12 flex items-center space-x-2">
+        <IoLogoReact className="text-4xl text-blue-500" />
         <Link to="/" className="btn btn-ghost text-xl">
           EduConnect
         </Link>
       </div>
 
+      {/* Desktop Menu */}
       <div className="flex-none lg:mr-12">
         <div className="hidden sm:flex space-x-4">
           <NavLink to="/" className="btn btn-ghost">
@@ -74,10 +75,10 @@ const Navbar = () => {
             Teach on EduConnect
           </NavLink>
 
-          {/* Dashboard Links Based on Role */}
+          {/* Dashboard Dropdown */}
           {user && (
             <div className="dropdown dropdown-hover">
-              <button className="btn btn-ghost  dark:text-gray-200">
+              <button className="btn btn-ghost dark:text-gray-200">
                 Dashboard
               </button>
               <ul className="dropdown-content bg-white dark:bg-gray-800 shadow-lg rounded-box p-2 w-52 border border-gray-200 dark:border-gray-700">
@@ -100,15 +101,16 @@ const Navbar = () => {
               </ul>
             </div>
           )}
-          {/* Theme Toggle Button */}
-          <div className="rounded-full flex justify-start items-center mr-2  text-gray-900 dark:text-white transition">
-            <button onClick={toggleTheme} className=" mr-2">
+
+          {/* Theme Toggle */}
+          <div className="rounded-full flex justify-start items-center mr-2 text-gray-900 dark:text-white transition">
+            <button onClick={toggleTheme} className="mr-2">
               {theme === "dark" ? <FiSun size={24} /> : <FiMoon size={24} />}
             </button>
           </div>
         </div>
 
-        {/* User Profile Image and Hover Dropdown */}
+        {/* User Avatar + Dropdown */}
         <div className="relative">
           {user ? (
             <div
@@ -157,7 +159,7 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Icon */}
         <div className="sm:hidden">
           <button
             onClick={toggleMobileMenu}
@@ -180,9 +182,9 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Dropdown */}
+        {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
-          <ul className="menu menu-compact bg-base-100 absolute right-0 top-full mt-2 w-48 rounded-box shadow-md">
+          <ul className="menu menu-compact bg-base-100 absolute right-0 top-full mt-2 w-48 rounded-box shadow-md z-50">
             <li>
               <NavLink to="/" onClick={() => setMobileMenuOpen(false)}>
                 Home
