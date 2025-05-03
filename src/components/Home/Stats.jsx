@@ -10,6 +10,7 @@ import {
   LinearScale,
   BarElement,
 } from "chart.js";
+import { FiUsers, FiBookOpen } from "react-icons/fi";
 
 // Register chart components
 ChartJS.register(
@@ -75,26 +76,18 @@ const Stats = () => {
 
       {/* Stat Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-        <div className="bg-white p-6 rounded-lg shadow-md text-center">
-          <img
-            src="https://i.ibb.co.com/Ph8mKK7/5.jpg"
-            alt="Users"
-            className="w-16 h-16 mx-auto mb-4"
-          />
-          <h3 className="text-xl font-semibold text-gray-700">Total Users</h3>
-          <p className="text-4xl font-bold text-blue-600 mt-2">
+        <div className="bg-white p-6 rounded-xl shadow-lg flex flex-col items-center justify-center">
+          <FiUsers className="text-5xl text-blue-500 mb-3" />
+          <h3 className="text-lg font-medium text-gray-700">Total Users</h3>
+          <p className="text-3xl font-bold text-blue-600 mt-1">
             {users.length}
           </p>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow-md text-center">
-          <img
-            src="https://i.ibb.co.com/jL4wpHj/total-recall-learning-how-to-learn-anything-faster-1024x555.png"
-            alt="Classes"
-            className="w-16 h-16 mx-auto mb-4"
-          />
-          <h3 className="text-xl font-semibold text-gray-700">Total Classes</h3>
-          <p className="text-4xl font-bold text-green-600 mt-2">
+        <div className="bg-white p-6 rounded-xl shadow-lg flex flex-col items-center justify-center">
+          <FiBookOpen className="text-5xl text-green-500 mb-3" />
+          <h3 className="text-lg font-medium text-gray-700">Total Classes</h3>
+          <p className="text-3xl font-bold text-green-600 mt-1">
             {allClasses.length}
           </p>
         </div>
@@ -102,13 +95,13 @@ const Stats = () => {
 
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-        <div className="bg-white p-4 rounded-lg shadow-md">
+        <div className="bg-white p-4 rounded-xl shadow-lg">
           <h2 className="text-lg font-semibold text-center mb-4">
             Pie Chart Overview
           </h2>
           <Pie data={pieData} />
         </div>
-        <div className="bg-white p-4 rounded-lg shadow-md">
+        <div className="bg-white p-4 rounded-xl shadow-lg">
           <h2 className="text-lg font-semibold text-center mb-4">
             Bar Chart Overview
           </h2>

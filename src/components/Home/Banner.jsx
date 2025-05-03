@@ -29,7 +29,7 @@ const slides = [
 
 const Banner = () => {
   return (
-    <div className="relative -mt-6">
+    <div className="relative -mt-8">
       <Carousel
         autoPlay
         infiniteLoop
@@ -44,7 +44,7 @@ const Banner = () => {
             <img
               src={slide.img}
               alt={`Banner ${slide.id}`}
-              className="w-full h-[300px] md:h-[450px] lg:h-[560px] object-cover"
+              className="w-full h-[300px] md:h-[450px] lg:h-[570px] object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">

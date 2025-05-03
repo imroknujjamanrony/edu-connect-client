@@ -142,7 +142,7 @@ const Navbar = () => {
 
                   <button
                     onClick={handleLogout}
-                    className="mt-2 w-full text-sm bg-gradient-to-r from-blue-500 to-purple-500 hover:text-white hover:bg-red-500 dark:hover:bg-red-600 px-3 py-2 rounded transition duration-200"
+                    className="mt-2 w-full text-white text-sm bg-gradient-to-r from-blue-500 to-purple-500 hover:text-white hover:bg-red-500 dark:hover:bg-red-600 px-3 py-2 rounded transition duration-200"
                   >
                     Logout
                   </button>
@@ -152,7 +152,7 @@ const Navbar = () => {
           ) : (
             <NavLink
               to="/login"
-              className="btn block text-base font-semibold text-white bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-600 dark:to-purple-600 hover:opacity-90 px-3 py-2 rounded transition duration-200 text-center"
+              className="btn btn-outline  text-base font-semibold text-white  hover:bg-blue-600 hover:text-white opacity-90  rounded transition duration-200 text-center"
             >
               Sign In
             </NavLink>
