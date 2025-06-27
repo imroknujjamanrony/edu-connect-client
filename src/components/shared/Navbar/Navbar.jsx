@@ -53,7 +53,7 @@ const Navbar = () => {
       ];
 
   return (
-    <div className="navbar fixed z-20 bg-sectionColor">
+    <div className="navbar fixed z-50 bg-sectionColor">
       {/* Logo and Site Name */}
       <div className="flex-1 lg:ml-12 flex items-center space-x-2">
         <IoLogoReact className="text-4xl text-blue-500" />
