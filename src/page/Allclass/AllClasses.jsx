@@ -10,7 +10,7 @@ const AllClasses = () => {
   const { data: allClasses, isLoading } = useQuery({
     queryKey: ["allClasses"],
     queryFn: async () => {
-      const { data } = await axios(
+      const { data } = await axios.get(
         `${import.meta.env.VITE_API_URL}/allClasses`
       );
       return data;
@@ -20,13 +20,22 @@ const AllClasses = () => {
   const [sortedClasses, setSortedClasses] = useState([]);
 
   if (isLoading) {
-    return <span className="loading loading-spinner text-success"></span>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-spinner text-success w-12 h-12"></span>
+      </div>
+    );
   }
 
   // Filter approved classes
   const approvedClasses = allClasses.filter(
     (classItem) => classItem.status === "approved"
   );
+
+  // Truncate description to 80 characters for uniform length
+  const truncateDescription = (desc) => {
+    return desc.length > 80 ? `${desc.substring(0, 77)}...` : desc;
+  };
 
   const sortAscending = () => {
     const sorted = [...approvedClasses].sort((a, b) => a.price - b.price);
@@ -43,23 +52,29 @@ const AllClasses = () => {
     sortedClasses.length > 0 ? sortedClasses : approvedClasses;
 
   return (
-    <div className="w-11/12 mx-auto">
-      <h1 className="text-3xl ml-8 font-bold mb-6">All Classes</h1>
-      <div className="flex justify-end mr-8 mb-4">
-        <button
+    <div className="w-11/12 mx-auto py-8">
+      <h1 className="text-3xl font-bold mb-8 text-gray-800 text-center">
+        All Classes
+      </h1>
+      <div className="flex justify-end mb-6 space-x-4">
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={sortAscending}
-          className="btn btn-outline bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 border-none shadow-lg mr-2 flex items-center"
+          className="flex items-center bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-md"
         >
           <FaSortAmountUp className="mr-2" /> Ascending Price
-        </button>
-        <button
+        </motion.button>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={sortDescending}
-          className="btn btn-outline bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 border-none shadow-lg flex items-center"
+          className="flex items-center bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-200 shadow-md"
         >
           <FaSortAmountDown className="mr-2" /> Descending Price
-        </button>
+        </motion.button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {displayClasses.map((classItem, index) => (
           <motion.div
             key={classItem._id}
@@ -68,37 +83,40 @@ const AllClasses = () => {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
             whileHover={{
-              scale: 1.05,
-              boxShadow: "0px 10px 20px rgba(0,0,0,0.2)",
+              scale: 1.03,
+              boxShadow: "0px 15px 30px rgba(0,0,0,0.15)",
             }}
-            className="bg-white p-6 rounded-lg shadow-md cursor-pointer"
+            className="relative bg-white p-6 rounded-2xl shadow-lg cursor-pointer border border-gray-100 overflow-hidden transition-all duration-300"
           >
+            <div className="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-400 text-white rounded-full flex items-center justify-center font-semibold text-lg z-10">
+              ${classItem.price}
+            </div>
             <img
               src={classItem.image}
               alt={classItem.title}
-              className="w-full h-48 object-cover rounded-lg mb-4"
+              className="w-full h-52 object-cover rounded-xl mb-4 transition-transform duration-300"
             />
-            <h2 className="text-xl text-gray-600 font-bold">
+            <h2 className="text-xl text-gray-800 font-bold mb-3">
               {classItem.title}
             </h2>
-            <p className="text-sm text-gray-600">
-              Name: {classItem.publisher.name}
+            <p className="text-sm text-gray-600 mb-2">
+              Teacher: {classItem.publisher.name}
             </p>
-            <p className="text-sm text-gray-600">Price: ${classItem.price}</p>
-            <p className="text-sm text-gray-600 mb-4">
-              Description: {classItem.description}
+            <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+              {truncateDescription(classItem.description)}
             </p>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-500 mb-4">
               Total Enrolment: {classItem.enroll}
             </p>
             <motion.button
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md mt-4"
+              className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2.5 rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-200"
               onClick={() => navigate(`/class/${classItem._id}`)}
             >
-              Enroll
+              Enroll Now
             </motion.button>
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600"></div>
           </motion.div>
         ))}
       </div>

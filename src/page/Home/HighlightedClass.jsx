@@ -29,10 +29,17 @@ const HighlightedClass = () => {
   // Take the top 6 courses with highest enrollment
   const sliceCourse = sortedCourses?.slice(0, 6);
 
+  // Truncate description to 80 characters for uniform length
+  const truncateDescription = (desc) => {
+    return desc.length > 80 ? `${desc.substring(0, 77)}...` : desc;
+  };
+
   return (
-    <div id="course" className="mt-12 w-11/12 mx-auto ">
-      <h1 className="text-3xl text-center font-bold mb-6">All Classes</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div id="course" className="mt-12 w-11/12 mx-auto">
+      <h1 className="text-3xl text-center font-bold mb-8 text-gray-800">
+        All Classes
+      </h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sliceCourse.map((classItem, index) => (
           <motion.div
             key={classItem._id}
@@ -41,33 +48,34 @@ const HighlightedClass = () => {
             transition={{ duration: 0.5, delay: index * 0.1 }}
             viewport={{ once: true }}
             whileHover={{
-              scale: 1.05,
-              boxShadow: "0px 10px 20px rgba(0,0,0,0.2)",
+              scale: 1.03,
+              boxShadow: "0px 15px 30px rgba(0,0,0,0.15)",
             }}
-            className="bg-white p-6 rounded-lg shadow-md cursor-pointer"
+            className="relative bg-white p-6 rounded-2xl shadow-lg cursor-pointer border border-gray-100 overflow-hidden transition-all duration-300"
           >
+            <div className="absolute top-4 right-4 w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-400 text-white rounded-full flex items-center justify-center font-semibold text-lg z-10">
+              ${classItem.price}
+            </div>
             <img
               src={classItem.image}
               alt={classItem.title}
-              className="w-full h-48 object-cover rounded-lg mb-4"
+              className="w-full h-52 object-cover rounded-xl mb-4 transition-transform duration-300"
             />
-            <h2 className="text-xl text-gray-700 font-bold">
+            <h2 className="text-xl text-gray-800 font-bold mb-3">
               {classItem.title}
             </h2>
-
-            <p className="text-sm text-gray-600">Price: ${classItem.price}</p>
-            <p className="text-sm text-gray-600 mb-4">
-              Description: {classItem.description}
+            <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+              {truncateDescription(classItem.description)}
             </p>
-
             <motion.button
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md mt-4"
+              className="w-full bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2.5 rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-200"
               onClick={() => navigate(`/class/${classItem._id}`)}
             >
-              Enroll
+              Enroll Now
             </motion.button>
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600"></div>
           </motion.div>
         ))}
       </div>

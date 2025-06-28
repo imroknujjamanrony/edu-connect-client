@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { FaEdit } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const MyProfile = () => {
   const axiosSecure = useAxiosSecure();
@@ -55,102 +56,131 @@ const MyProfile = () => {
 
   if (isLoading || !profileData) {
     return (
-      <div className="w-full min-h-screen flex items-center justify-center">
-        <p>Loading...</p>
+      <div className="w-full min-h-screen flex items-center justify-center bg-gray-50">
+        <span className="loading loading-spinner text-blue-500 w-12 h-12"></span>
       </div>
     );
   }
 
   if (isError) {
     return (
-      <div className="w-full min-h-screen flex items-center justify-center">
-        <p>Error: {error.message}</p>
+      <div className="w-full min-h-screen flex items-center justify-center bg-gray-50">
+        <p className="text-red-500 text-lg font-medium">
+          Error: {error.message}
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center w-full min-h-screen bg-[#eaf7f9] px-4 py-10">
-      {/* Sidebar */}
-      <div className="w-full lg:w-1/4 max-w-sm bg-white rounded-lg shadow-md p-4 text-center">
-        <div className="flex justify-center">
-          <div className="relative w-28 h-28 rounded-full border-4 border-white overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-5xl mx-auto flex flex-col lg:flex-row gap-6"
+      >
+        {/* Sidebar */}
+        <div className="w-full lg:w-1/3 bg-white rounded-2xl shadow-lg p-6 text-center">
+          <div className="relative mx-auto w-32 h-32 rounded-full border-4 border-blue-100 overflow-hidden mb-4">
             <img
               src={profileData.image || "https://via.placeholder.com/150"}
               alt="Profile"
               className="object-cover w-full h-full"
               referrerPolicy="no-referrer"
             />
-            <span className="absolute top-0 right-0 bg-green-500 w-4 h-4 rounded-full border-2 border-white"></span>
+            <span className="absolute top-2 right-2 bg-green-500 w-4 h-4 rounded-full border-2 border-white"></span>
+          </div>
+          <h2 className="text-xl font-bold text-gray-800">
+            {profileData.name}
+          </h2>
+          <p className="text-sm text-gray-500 mt-1">
+            UserId: {profileData._id?.slice(0, 24)}
+          </p>
+          <div className="mt-6">
+            <button className="w-full py-2 px-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-200">
+              Profile Info
+            </button>
           </div>
         </div>
-        <h2 className="text-lg font-semibold mt-4">{profileData.name}</h2>
-        <p className="text-sm text-gray-500">
-          UserId: {profileData._id?.slice(0, 24)}
-        </p>
 
-        <div className="mt-4 text-left space-y-3">
-          <button className="w-full text-left py-2 px-4 bg-[#e6f7ff] rounded-md font-semibold">
-            Profile Info
-          </button>
+        {/* Main Profile Info */}
+        <div className="w-full lg:w-2/3 bg-white rounded-2xl shadow-lg p-6 sm:p-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-6">
+            Profile Information
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <p className="text-sm text-gray-500">Full Name</p>
+              <p className="font-medium text-gray-800">{profileData.name}</p>
+            </div>
+            <div className="space-y-2">
+              <p className="text-sm text-gray-500">Username</p>
+              <p className="font-medium text-gray-800">No username</p>
+            </div>
+            <div className="space-y-2">
+              <p className="text-sm text-gray-500">Email</p>
+              <p className="font-medium text-gray-800">{profileData.email}</p>
+            </div>
+            <div className="space-y-2">
+              <p className="text-sm text-gray-500">Location</p>
+              <div className="flex items-center justify-between">
+                <p className="font-medium text-gray-800">
+                  {additionalInfo.location || "Dhaka, Bangladesh"}
+                </p>
+                <motion.div
+                  whileHover={{ scale: 1.2 }}
+                  className="cursor-pointer"
+                  onClick={() => openEditModal("location")}
+                >
+                  <FaEdit className="text-blue-500 hover:text-blue-600" />
+                </motion.div>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <p className="text-sm text-gray-500">Address</p>
+              <div className="flex items-center justify-between">
+                <p className="font-medium text-gray-800">
+                  {additionalInfo.address || "N/A"}
+                </p>
+                <motion.div
+                  whileHover={{ scale: 1.2 }}
+                  className="cursor-pointer"
+                  onClick={() => openEditModal("address")}
+                >
+                  <FaEdit className="text-blue-500 hover:text-blue-600" />
+                </motion.div>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <p className="text-sm text-gray-500">Bio</p>
+              <div className="flex items-center justify-between">
+                <p className="font-medium text-gray-800">
+                  {additionalInfo.bio || "Hey kiddo"}
+                </p>
+                <motion.div
+                  whileHover={{ scale: 1.2 }}
+                  className="cursor-pointer"
+                  onClick={() => openEditModal("bio")}
+                >
+                  <FaEdit className="text-blue-500 hover:text-blue-600" />
+                </motion.div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-
-      {/* Main Profile Info */}
-      <div className="w-full lg:w-3/4 mt-6 lg:mt-0 lg:ml-6 bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold text-[#047d9d] mb-6">Profile Info</h2>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <p className="text-sm text-gray-500">Full Name</p>
-            <p className="font-medium">{profileData.name}</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Username</p>
-            <p className="font-medium">No username</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Email</p>
-            <p className="font-medium">{profileData.email}</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Location</p>
-            <p className="font-medium flex justify-between items-center">
-              {additionalInfo.location || "Dhaka, Bangladesh"}
-              <FaEdit
-                className="ml-2 cursor-pointer text-gray-500 hover:text-gray-800"
-                onClick={() => openEditModal("location")}
-              />
-            </p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Address</p>
-            <p className="font-medium flex justify-between items-center">
-              {additionalInfo.address || "N/A"}
-              <FaEdit
-                className="ml-2 cursor-pointer text-gray-500 hover:text-gray-800"
-                onClick={() => openEditModal("address")}
-              />
-            </p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Bio</p>
-            <p className="font-medium flex justify-between items-center">
-              {additionalInfo.bio || "Hey kiddo"}
-              <FaEdit
-                className="ml-2 cursor-pointer text-gray-500 hover:text-gray-800"
-                onClick={() => openEditModal("bio")}
-              />
-            </p>
-          </div>
-        </div>
-      </div>
+      </motion.div>
 
       {/* Edit Modal */}
       {isEditing && fieldToEdit && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h2 className="text-lg font-bold mb-4 capitalize">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 px-4"
+        >
+          <div className="bg-white p-6 rounded-2xl shadow-xl w-full max-w-md">
+            <h2 className="text-lg font-bold text-gray-800 mb-4 capitalize">
               Edit {fieldToEdit}
             </h2>
             <input
@@ -158,25 +188,29 @@ const MyProfile = () => {
               name={fieldToEdit}
               value={additionalInfo[fieldToEdit] || ""}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border border-gray-300 rounded bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-2 border border-gray-200 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
               placeholder={`Enter your ${fieldToEdit}`}
             />
-            <div className="flex justify-end mt-4 gap-2">
-              <button
+            <div className="flex justify-end mt-6 gap-3">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => setIsEditing(false)}
-                className="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"
+                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-all duration-200"
               >
                 Cancel
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={handleSave}
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                className="px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all duration-200"
               >
                 Save
-              </button>
+              </motion.button>
             </div>
           </div>
-        </div>
+        </motion.div>
       )}
     </div>
   );
