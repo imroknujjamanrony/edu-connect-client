@@ -33,7 +33,7 @@ const slides = [
 
 const Banner = () => {
   return (
-    <div className="relative h-screen w-full">
+    <div className="relative -mt-8 h-screen w-full">
       <Swiper
         modules={[Autoplay, Pagination, EffectFade]}
         effect="fade"
@@ -73,3 +73,5 @@ const Banner = () => {
 };
 
 export default Banner;
+
+// This code defines a Banner component that uses Swiper to create a full-screen banner with slides.
