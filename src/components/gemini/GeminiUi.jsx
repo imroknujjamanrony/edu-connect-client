@@ -20,7 +20,7 @@ const GeminiUi = () => {
 
     try {
       const res = await fetch(
-        "https://marathon-hub-server-chi.vercel.app/geminiBot",
+        "https://edu-connect-server-ebon.vercel.app/geminiBot",
         {
           method: "POST",
           headers: {
