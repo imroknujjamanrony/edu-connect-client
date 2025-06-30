@@ -3,20 +3,35 @@ import axios from "axios";
 
 const TeacherSection = () => {
   const {
-    data: allTeachers = [],
+    data: teachers = [],
     error,
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["all-teacher"],
+    queryKey: ["filtered-teacher-list"], // ✅ use unique queryKey
     queryFn: async () => {
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_BASE_URL}/all-teacher`
         );
-        return response.data;
+
+        const rawUsers = Array.isArray(response.data) ? response.data : [];
+
+        console.log("📦 API Raw Response:", rawUsers);
+        console.log(
+          "🧪 User Roles:",
+          rawUsers.map((u) => u.role)
+        );
+
+        const filteredTeachers = rawUsers.filter(
+          (user) => user.role?.toLowerCase().trim() === "teacher"
+        );
+
+        console.log("🎯 Filtered Teachers:", filteredTeachers);
+
+        return filteredTeachers;
       } catch (err) {
-        console.error("API Error:", {
+        console.error("❌ API Error:", {
           message: err.message,
           status: err.response?.status,
           data: err.response?.data,
@@ -27,9 +42,9 @@ const TeacherSection = () => {
   });
 
   return (
-    <div className="min-h-screen  py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header Section */}
+        {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-white mb-3">
             Meet Our Teachers
@@ -39,7 +54,7 @@ const TeacherSection = () => {
           </p>
         </div>
 
-        {/* Loading State */}
+        {/* Loading Spinner */}
         {isLoading && (
           <div className="flex justify-center items-center h-64">
             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-indigo-600"></div>
@@ -52,31 +67,26 @@ const TeacherSection = () => {
             <p className="text-lg font-medium">
               Error: {error.message || "Unable to load teachers"}
             </p>
-            <p className="text-sm mt-2">
-              Check the console for more details or try again.
-            </p>
             <button
               onClick={refetch}
-              className="mt-4 inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-all duration-200"
+              className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
             >
               Try Again
             </button>
           </div>
         )}
 
-        {/* Teachers Grid */}
-        {!isLoading && !error && allTeachers.length === 0 && (
+        {/* No Teachers */}
+        {!isLoading && !error && teachers.length === 0 && (
           <div className="text-center p-6 bg-gray-100 text-gray-600 rounded-lg">
             <p className="text-lg font-medium">No teachers found.</p>
-            <p className="text-sm mt-2">
-              It looks like there are no teachers available at the moment.
-            </p>
           </div>
         )}
 
-        {!isLoading && !error && allTeachers.length > 0 && (
+        {/* Teachers Grid */}
+        {!isLoading && !error && teachers.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {allTeachers.map((teacher) => (
+            {teachers.map((teacher) => (
               <div
                 key={teacher._id}
                 className="bg-white rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
@@ -94,7 +104,7 @@ const TeacherSection = () => {
                 <p className="text-gray-600 text-center mt-1">
                   {teacher.title || "No title"}
                 </p>
-                <p className="text-gray-500 text-center text-sm mt-1 capitalize">
+                <p className="text-gray-500 text-center mt-1 capitalize">
                   {teacher.experience || "Unknown"} Level
                 </p>
                 <p className="text-gray-500 text-center text-sm mt-1">
@@ -102,6 +112,9 @@ const TeacherSection = () => {
                 </p>
                 <p className="text-gray-600 text-center text-sm mt-2 truncate">
                   {teacher.email || "No email"}
+                </p>
+                <p className="text-gray-600 text-center text-sm mt-2">
+                  Role: {teacher.role || "No role"}
                 </p>
               </div>
             ))}
